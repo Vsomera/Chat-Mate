@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+nav {
+    border-bottom: 1px solid black;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-content ul {
+    display: flex;
+}
+.nav-content li {
+    margin-left: 10px;
+}

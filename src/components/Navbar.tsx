@@ -8,7 +8,9 @@ const Navbar = () => {
                 <div className="nav-content">
                     <div id="title">
                         <Link to="/">
-                            <h1> <FaRocketchat className="icon" /> Chat<a>Mate</a></h1>
+                            <h1>
+                                <FaRocketchat className="icon" /> Chat<a>Mate</a>
+                            </h1>
                         </Link>
                     </div>
 

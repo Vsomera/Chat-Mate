@@ -1,7 +1,9 @@
 const Login = () => {
     return (
         <>
-            Login
+            <div className="auth-container">
+                Login
+            </div>
         </>
     )
 }

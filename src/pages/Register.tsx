@@ -1,7 +1,9 @@
 const Register = () => {
     return (
         <>
-            Register
+            <div className="auth-container">
+                Register
+            </div>
         </>
     )
 }

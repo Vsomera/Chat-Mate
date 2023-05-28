@@ -1,4 +1,4 @@
-const ChatDashboard = () => {
+const ChatPage = () => {
     return (
         <div className="chat-container">
             Chat Dashboard
@@ -6,4 +6,4 @@ const ChatDashboard = () => {
     )
 }
 
-export default ChatDashboard
+export default ChatPage

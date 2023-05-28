@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import ChatDashboard from "./pages/Chat"
+import ChatPage from "./pages/ChatPage"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Navbar from "./components/Navbar"
@@ -13,7 +13,7 @@ function App() {
         <Navbar />
         <div className="container">
           <Routes>
-            <Route path="/" element={ <ChatDashboard />} />
+            <Route path="/" element={ <ChatPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>

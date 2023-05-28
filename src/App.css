@@ -9,6 +9,11 @@
   color: white;
 }
 
+body {
+  overflow: hidden; /* Hide scrollbars */
+}
+
+
 /* Nav Bar */
 nav {
   border-bottom: 1px solid white;
@@ -49,14 +54,12 @@ h1 {
 
 .nav-link {
   text-decoration: none;
-  color: white;
 }
 
 /* Nav Link Animations */
 .nav-link::before {
   content: "";
   position: absolute;
-  left: 0;
   bottom: -5px;
   width: 0;
   height: 2px;
@@ -71,11 +74,17 @@ h1 {
 /* Login and Register Page */
 .auth-container {
   text-align: center;
-  height: 95vh;
+  width: 100%;
+  height: 100vh;
+  background-image: 
+    linear-gradient(to bottom, #292B36, rgba(62, 64, 75, 0.8)), 
+    url("./images/trees2.svg");
+  background-repeat: no-repeat;
+  background-size: 100% ;
 }
 
 /* Chat Page*/
 .chat-container {
   text-align: center;
-  height: 95vh;
+  height: 90vh;
 }

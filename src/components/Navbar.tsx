@@ -1,7 +1,34 @@
 import { FaSignInAlt, FaRegUser, FaSignOutAlt, FaRocketchat } from "react-icons/fa"
+import { useState, useEffect } from "react"
+import { auth } from "../config/firebase"
+import { signOut } from "firebase/auth"
 import { Link } from "react-router-dom"
 
 const Navbar = () => {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    useEffect(() => {
+        // Checks if a user is logged in
+        auth.onAuthStateChanged((user)=> {
+            if (user != null) {
+                setIsLoggedIn(true)
+            } else {
+                setIsLoggedIn(false)
+            }
+        })
+    })
+
+    const logout = async () => {
+        try {
+            // logs out the currently logged in user
+            await signOut(auth)
+            console.log("Successfully logged out")
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <>
             <nav>
@@ -25,14 +52,16 @@ const Navbar = () => {
                                 <FaRegUser className="icon" />  Register
                             </Link>
                         </li>
-                        <li>
-                            <Link className="nav-link" to="/login">
-                                <FaSignOutAlt className="icon" />  LogOut
-                            </Link>
-                        </li>
+                        { isLoggedIn &&
+                            <li onClick={logout}>
+                                <Link className="nav-link" to="/login">
+                                    <FaSignOutAlt className="icon" />  LogOut
+                                </Link>
+                            </li>
+                        }
                     </ul>
                 </div>
-            </nav>
+            </nav >
         </>
     )
 }

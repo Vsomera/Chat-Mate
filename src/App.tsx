@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import 'react-toastify/dist/ReactToastify.css';
 import ChatPage from "./pages/ChatPage"
 import Login from "./pages/Login"
 import Register from "./pages/Register"

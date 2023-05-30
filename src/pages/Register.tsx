@@ -1,12 +1,12 @@
 import { FaRegUser } from "react-icons/fa"
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react"
-import { auth, googleProvider } from "../config/firebase"
-import { createUserWithEmailAndPassword } from "firebase/auth"
+import { useState } from "react"
+import { auth } from "../config/firebase"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 
 const Register = () => {
-    const [name, setName] = useState("")
+    const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
@@ -16,12 +16,17 @@ const Register = () => {
     const registerEmailPassword = async () => {
         try {
             // registers a user into firebase with email and password
-            await createUserWithEmailAndPassword(auth, email, password)
-            
-            toast.success(`Welcome ${name}`)
+            const newUser = await createUserWithEmailAndPassword(auth, email, password)
+
+            // set display name to the username
+            await updateProfile(newUser.user, {
+                displayName: username
+            })
+
+            toast.success(`Welcome ${username}`)
             navigate("/")
-            
-        } catch (err) { // TODO fix
+
+        } catch (err) {
             const errorMessage = (err as Error).message
             toast.error(`${errorMessage}`)
         }
@@ -31,6 +36,15 @@ const Register = () => {
         setPassword("")
     }
 
+
+    const onSubmit = async () => {
+        if (password !== confirmPassword) {
+            return toast.error("Passwords do not match")
+        } 
+        registerEmailPassword()
+    }
+
+    // remove br tag
     return (
         <>
             <div className="auth-background">
@@ -38,25 +52,26 @@ const Register = () => {
 
                     <section className="register-content">
                         <h1>Create an Account</h1>
-                        <br />
-                        <p>We'll need your name, email address, and a unique password. </p>
-                        <p>You'll use this login to access ChatMate next time. </p>
+                            <div>
+                                <p>We'll need your name, email address, and a unique password. </p>
+                                <p>You'll use this login to access ChatMate next time. </p>
+                            </div>
                     </section>
 
-                    <hr></hr>
+                    <hr/>
 
                     <section className="register-form">
                         <div>
                             <h1><FaRegUser className="icon" /> Register</h1>
                         </div>
 
-                        <form className="register-group">
+                        <form className="register-group" autoComplete="off">
                             <input
                                 id="name"
                                 className="input"
                                 type="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                                 placeholder="Please enter a Username" />
                             <div className="underline"></div>
                             <input
@@ -85,7 +100,7 @@ const Register = () => {
                                 placeholder="Confirm Password" />
                             <div className="underline"></div>
                         </form>
-                        <button onClick={registerEmailPassword}>Sign In</button>
+                        <button type="submit" onClick={onSubmit}>Sign In</button>
                     </section>
 
                 </div>

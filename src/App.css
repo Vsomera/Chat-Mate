@@ -16,6 +16,8 @@ body {
 /*Custom react-toast Styles*/
 .toastContainerCss {
   background-color: transparent;
+  top: 4rem;
+  right: 5.6rem;
 }
 .Toastify__toast-body, 
 .Toastify__toast-icon svg,
@@ -85,7 +87,7 @@ nav {
   height: 100vh;
   background-image: 
     linear-gradient(to bottom, #292b36, rgba(62, 64, 75, 0.8)),
-    url("./images/waves3.svg");
+    url("./images/trees.svg");
   background-repeat: no-repeat;
   background-size: cover;
 }

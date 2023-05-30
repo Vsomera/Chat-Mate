@@ -31,17 +31,48 @@ const Register = () => {
             toast.error(`${errorMessage}`)
         }
         console.log(auth.currentUser)
-        // empties text box
-        setEmail("")
-        setPassword("")
     }
+
+    function checkStrongPassword(password : string) {
+        // Verifies password strength
+        const requirements = [
+          { regex: /[a-z]/, message: "Password should contain at least one lowercase letter" },
+          { regex: /[A-Z]/, message: "Password should contain at least one uppercase letter" },
+          { regex: /[0-9]/, message: "Password should contain at least one digit" },
+          { regex: /[!@#$%^&*]/, message: "Password should contain at least one special character (!@#$%^&*)" }
+        ];
+      
+        for (const requirement of requirements) {
+          if (!requirement.regex.test(password)) {
+            return toast.error(requirement.message);
+          }
+        }
+      
+        if (password.length < 8) {
+          return toast.error("Password should be at least 8 characters long");
+        }
+
+        // returns password if password requirements are met
+        return password;
+      }
 
 
     const onSubmit = async () => {
+        if (username.trim().length == 0) {
+            return toast.error("Error: Missing Registration Fields")
+        } else {
+            if (password.trim().length == 0) {
+                return toast.error("Please enter a password")
+            }
+        }
+
         if (password !== confirmPassword) {
             return toast.error("Passwords do not match")
         } 
-        registerEmailPassword()
+
+        if (checkStrongPassword(password) === password) {
+            registerEmailPassword()
+        }
     }
 
     // remove br tag
@@ -92,7 +123,7 @@ const Register = () => {
                             <div className="underline"></div>
 
                             <input
-                                id="password"
+                                id="confirm-password"
                                 className="input"
                                 type="password"
                                 value={confirmPassword}

@@ -13,6 +13,18 @@ body {
   overflow: hidden; /* Hide scrollbars */
 }
 
+/*Custom react-toast Styles*/
+.toastContainerCss {
+  background-color: transparent;
+}
+.Toastify__toast-body, 
+.Toastify__toast-icon svg,
+.Toastify__toast-body div,
+.Toastify__close-button svg {
+  background-color: #121212;
+  font-size: 0.9rem;
+}
+
 /* Nav Bar */
 nav {
   border-bottom: 1px solid white;
@@ -66,8 +78,6 @@ nav {
   width: 100%;
 }
 
-/* Login and Register Page */
-
 /*Inherits the background of the auth-background*/
 .auth-background {
   position: absolute;
@@ -91,6 +101,8 @@ nav {
 .login-content * {
   background: transparent;
 }
+
+/* Login and Register Page */
 .auth-container {
   background-color: transparent;
   justify-content: space-around;
@@ -100,43 +112,56 @@ nav {
   width: 90%;
   height: 90vh;
 }
-
-/*Register Page*/
-.register-content h1 {
+.register-content, 
+.login-content {
+  height: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.register-content h1, 
+.login-content h1 {
   font-weight: 100;
   font-size: xx-large;
 }
-.register-content p {
+.register-content p, 
+.login-content p {
   color: grey;
   padding: 0 5px;
   font-weight: 100;
   font-size: medium;
 }
+.login-content {
+  height: 7rem;
+  width: 45rem;
+}
 hr {
   height: 30rem;
 }
-.register-form {
+.register-form, 
+.login-form {
   text-align: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: column;
   height: 28rem;
   width: 50%;
   background-color: rgba(62, 64, 75, 0.5);
-  border-radius: 5px;
+  border-radius: 20px;
   padding: 2rem;
 }
-.register-form h1 {
+.register-form h1, 
+.login-form h1 {
   font-weight: 100;
   font-size: xxx-large;
 }
-
-.register-group {
+.register-group, 
+.login-group {
   margin: 0 auto;
   width: 70%;
 }
 
-/*input animations*/
+/*input animations for login and register*/
 input {
   position: relative;
   display: inline-block;
@@ -166,9 +191,11 @@ input::-webkit-input-placeholder {
   transition: all 0.5s linear;
 }
 
+/*Button underline for log in and register*/
 button {
   margin: 0 auto;
   width: 10%;
+  white-space: nowrap;
   display: inline-block;
   position: relative;
   border: none;
@@ -180,8 +207,8 @@ button::after {
   position: absolute;
   width: 100%;
   transform: scaleX(0);
-  height: 2px;
-  bottom: 0;
+  height: 1px;
+  bottom: -3px;
   left: 0;
   background-color: #1990ff;
   transform-origin: bottom right;

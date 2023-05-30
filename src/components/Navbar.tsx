@@ -2,6 +2,7 @@ import { FaSignInAlt, FaRegUser, FaSignOutAlt, FaRocketchat } from "react-icons/
 import { useState, useEffect } from "react"
 import { auth } from "../config/firebase"
 import { signOut } from "firebase/auth"
+import { toast } from "react-toastify"
 import { Link } from "react-router-dom"
 
 const Navbar = () => {
@@ -23,6 +24,7 @@ const Navbar = () => {
         try {
             // logs out the currently logged in user
             await signOut(auth)
+            toast.success("Successfully Logged Out")
             console.log("Successfully logged out")
         } catch (err) {
             console.log(err)
@@ -42,16 +44,20 @@ const Navbar = () => {
                     </div>
 
                     <ul>
-                        <li>
-                            <Link className="nav-link" to="/login">
-                                <FaSignInAlt className="icon" />  Login
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className="nav-link" to="/register">
-                                <FaRegUser className="icon" />  Register
-                            </Link>
-                        </li>
+                        { !isLoggedIn &&
+                            <>
+                                <li>
+                                    <Link className="nav-link" to="/login">
+                                        <FaSignInAlt className="icon" />  Login
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link className="nav-link" to="/register">
+                                        <FaRegUser className="icon" />  Register
+                                    </Link>
+                                </li>
+                            </>
+                        }
                         { isLoggedIn &&
                             <li onClick={logout}>
                                 <Link className="nav-link" to="/login">

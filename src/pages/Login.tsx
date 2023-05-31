@@ -1,5 +1,8 @@
 import { useState } from "react"
 import { FaSignInAlt } from "react-icons/fa"
+import { FcGoogle } from "react-icons/fc"
+import { VscGithub } from "react-icons/vsc"
+import { CgMicrosoft } from "react-icons/cg"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { auth } from "../config/firebase"
@@ -15,13 +18,16 @@ const Login = () => {
 
     const onSubmit = async () => {
         try {
-            // Logs in a user
-            const userLogin = await signInWithEmailAndPassword(auth, email, password)
-            toast.success(`Welcome Back ${userLogin.user.displayName}!`)
+            if (email.trim().length == 0) {
+                return toast.error("Error: Missing Login Fields")
+            } else {
+                // Logs in a user
+                const userLogin = await signInWithEmailAndPassword(auth, email, password)
+                toast.success(`Welcome Back ${userLogin.user.displayName}!`)
 
-            // redirect to chats page
-            navigate("/")
-
+                // redirect to chats page
+                navigate("/")
+            }
         } catch (err) {
             const errorMessage = (err as Error).message
             toast.error(`${errorMessage}`)
@@ -36,10 +42,30 @@ const Login = () => {
 
                     <section className="login-content">
                         <h1>Welcome Back!</h1>
-                            <div>
-                                <p>Easily stay connected, and have meaningful conversations.  </p>
-                                <p>ChatMate provides a secure and user-friendly platform for seamless communication.</p>
+                        <div>
+                            <p>Easily stay connected, and have meaningful conversations.  </p>
+                            <p>ChatMate provides a secure and user-friendly platform for seamless communication.</p>
+                        </div>
+
+                        <div className="auth-divider"><p>or log in with</p></div>
+
+                        <div className="auth-methods">
+                            <div className="icon-wrapper">
+                                <div className="icon-container-google">
+                                    <FcGoogle className="auth-icon" />
+                                </div>
                             </div>
+                            <div className="icon-wrapper">
+                                <div className="icon-container-github">
+                                    <VscGithub className="auth-icon" />
+                                </div>
+                            </div>
+                            <div className="icon-wrapper">
+                                <div className="icon-container-microsoft">
+                                    <CgMicrosoft className="auth-icon" />
+                                </div>
+                            </div>
+                        </div>
                     </section>
 
                     <hr />

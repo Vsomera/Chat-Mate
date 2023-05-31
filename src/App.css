@@ -87,7 +87,7 @@ nav {
   height: 100vh;
   background-image: 
     linear-gradient(to bottom, #292b36, rgba(62, 64, 75, 0.8)),
-    url("./images/trees.svg");
+    url("./images/waves3.svg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -116,11 +116,16 @@ nav {
 }
 .register-content, 
 .login-content {
-  height: 6rem;
+  height: 15rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
+.login-content {
+  width: 40rem;
+}
+
 .register-content h1, 
 .login-content h1 {
   font-weight: 100;
@@ -133,10 +138,87 @@ nav {
   font-weight: 100;
   font-size: medium;
 }
-.login-content {
-  height: 7rem;
-  width: 45rem;
+
+/*Hr between content and sign in method*/
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #1990ff;
+}
+.auth-divider p {
+  color: white;
+}
+.auth-divider:not(:empty)::before {
+  margin-right: .25em;
+}
+.auth-divider:not(:empty)::after {
+  margin-left: .25em;
+}
+
+/* Google, GitHub, Microsoft Icons */
+.auth-methods {
+  height: 3rem;
+  width: 100%;
+  display: flex;
+}
+.auth-methods div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.icon-wrapper:nth-child(-n+2) {
+  /*Line divider between icon*/
+ border-right: 1px solid;
+}
+
+.auth-icon { 
+  height: 2rem;
+  width: 2rem;
+}
+
+/* Auth icon animations */
+.icon-wrapper { 
+  /*Keeps width from changing on hover*/
+  width: 10rem;
+  cursor: pointer;
+}
+.icon-container-google::after {
+  content: "Google";
+}
+.icon-container-github::after {
+  content : "GitHub"
+}
+.icon-container-microsoft::after {
+  content : "Microsoft"
+}
+.icon-container-google::after, 
+.icon-container-github::after,
+.icon-container-microsoft::after {
+  position: relative;
+  bottom: 0;
+  width: 0;
+  height: 50px;
+  transition: width 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon-container-google:hover::after,
+.icon-container-github:hover::after,
+.icon-container-microsoft:hover::after {
+  width: 50%;
+  opacity: 1;
+}
+
 hr {
   height: 30rem;
 }

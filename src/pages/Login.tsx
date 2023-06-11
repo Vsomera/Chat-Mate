@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { FaSignInAlt } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -14,6 +14,15 @@ const Login = () => {
     const [password, setPassword] = useState("")
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        auth.onAuthStateChanged((user) => {
+         if (user !== null) {
+             navigate("/")
+         }
+        })
+ 
+     }, [navigate])
 
     const onSubmit = async () => {
         try {

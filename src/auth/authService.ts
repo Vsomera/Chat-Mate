@@ -1,9 +1,10 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { auth } from "../config/firebase"
+import { auth, googleProvider } from "../config/firebase"
 import { toast } from "react-toastify"
+import { signInWithPopup } from "firebase/auth"
 
 export const registerEmailPassword = async (
-    username : string,
+    username: string,
     email: string,
     password: string) => {
 
@@ -23,4 +24,18 @@ export const registerEmailPassword = async (
         toast.error(`${errorMessage}`)
     }
     console.log(auth.currentUser)
+}
+
+export const signInGoogle = async () => {
+    try {
+        // logs in a user using google account
+        const user = await signInWithPopup(auth, googleProvider)
+        toast.success(`Welcome ${user.user.displayName}`)
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            toast.error(err.message)
+        } else {
+            toast.error('Error : Could not log in with Google')
+        }
+    }
 }

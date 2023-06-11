@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { auth } from "../config/firebase"
 import { signInWithEmailAndPassword } from "firebase/auth"
+import AuthMethods from "../components/AuthMethods";
+
 
 
 const Login = () => {
@@ -49,23 +51,8 @@ const Login = () => {
 
                         <div className="auth-divider"><p>or log in with</p></div>
 
-                        <div className="auth-methods">
-                            <div className="icon-wrapper">
-                                <div className="icon-container-google">
-                                    <FcGoogle className="auth-icon" />
-                                </div>
-                            </div>
-                            <div className="icon-wrapper">
-                                <div className="icon-container-github">
-                                    <VscGithub className="auth-icon" />
-                                </div>
-                            </div>
-                            <div className="icon-wrapper">
-                                <div className="icon-container-microsoft">
-                                    <CgMicrosoft className="auth-icon" />
-                                </div>
-                            </div>
-                        </div>
+                        <AuthMethods />
+                        
                     </section>
 
                     <hr />

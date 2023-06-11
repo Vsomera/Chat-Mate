@@ -1,12 +1,10 @@
 import { FaRegUser } from "react-icons/fa"
-import { FcGoogle } from "react-icons/fc"
-import { VscGithub } from "react-icons/vsc"
-import { CgMicrosoft } from "react-icons/cg"
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"
 import { auth } from "../config/firebase"
 import { registerEmailPassword } from "../auth/authService";
+import AuthMethods from "../components/AuthMethods";
 
 const Register = () => {
     const [username, setUsername] = useState("")
@@ -82,23 +80,7 @@ const Register = () => {
 
                         <div className="auth-divider"><p>or sign in with</p></div>
 
-                        <div className="auth-methods">
-                            <div className="icon-wrapper">
-                                <div className="icon-container-google">
-                                    <FcGoogle className="auth-icon" />
-                                </div>
-                            </div>
-                            <div className="icon-wrapper">
-                                <div className="icon-container-github">
-                                    <VscGithub className="auth-icon" />
-                                </div>
-                            </div>
-                            <div className="icon-wrapper">
-                                <div className="icon-container-microsoft">
-                                    <CgMicrosoft className="auth-icon" />
-                                </div>
-                            </div>
-                        </div>
+                        <AuthMethods />
 
                     </section>
 

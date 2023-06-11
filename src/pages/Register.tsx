@@ -4,9 +4,9 @@ import { VscGithub } from "react-icons/vsc"
 import { CgMicrosoft } from "react-icons/cg"
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { auth } from "../config/firebase"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
+import { registerEmailPassword } from "../auth/authService";
 
 const Register = () => {
     const [username, setUsername] = useState("")
@@ -16,25 +16,15 @@ const Register = () => {
 
     const navigate = useNavigate()
 
-    const registerEmailPassword = async () => {
-        try {
-            // registers a user into firebase with email and password
-            const newUser = await createUserWithEmailAndPassword(auth, email, password)
+    useEffect(() => {
+        // Checks if a user is logged in
+        auth.onAuthStateChanged((user) => {
+          if (user !== null) {
+            navigate("/");
+          }
+        })
 
-            // set display name to the username
-            await updateProfile(newUser.user, {
-                displayName: username
-            })
-
-            toast.success(`Welcome ${username}`)
-            navigate("/")
-
-        } catch (err) {
-            const errorMessage = (err as Error).message
-            toast.error(`${errorMessage}`)
-        }
-        console.log(auth.currentUser)
-    }
+      }, [navigate])
 
     function checkStrongPassword(password: string) {
         // Verifies password strength
@@ -50,11 +40,9 @@ const Register = () => {
                 return toast.error(requirement.message);
             }
         }
-
         if (password.length < 8) {
             return toast.error("Password should be at least 8 characters long");
         }
-
         // returns password if password requirements are met
         return password;
     }
@@ -74,7 +62,7 @@ const Register = () => {
         }
 
         if (checkStrongPassword(password) === password) {
-            registerEmailPassword()
+            await registerEmailPassword(username, email, password)
         }
     }
 

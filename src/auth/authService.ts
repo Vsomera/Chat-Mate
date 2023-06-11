@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { auth, googleProvider } from "../config/firebase"
+import { auth, gitHubProvider, googleProvider, microsoftProvider } from "../config/firebase"
 import { toast } from "react-toastify"
 import { signInWithPopup } from "firebase/auth"
 
@@ -36,6 +36,35 @@ export const signInGoogle = async () => {
             toast.error(err.message)
         } else {
             toast.error('Error : Could not log in with Google')
+        }
+    }
+}
+
+
+export const signInGithub = async () => {
+    try {
+        // logs in a user using gitHub account
+        const user = await signInWithPopup(auth, gitHubProvider)
+        toast.success(`Welcome ${user.user.displayName}`)
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            toast.error(err.message)
+        } else {
+            toast.error('Error : Could not log in with Github')
+        }
+    }
+}
+export const signInMS = async () => {
+    try {
+        // logs in a user using Microsoft account
+        const user = await signInWithPopup(auth, microsoftProvider)
+        toast.success(`Welcome ${user.user.displayName}`)
+
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            toast.error(err.message)
+        } else {
+            toast.error('Error : Could not log in with Microsoft')
         }
     }
 }

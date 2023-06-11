@@ -1,8 +1,5 @@
 import { useState } from "react"
 import { FaSignInAlt } from "react-icons/fa"
-import { FcGoogle } from "react-icons/fc"
-import { VscGithub } from "react-icons/vsc"
-import { CgMicrosoft } from "react-icons/cg"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { auth } from "../config/firebase"
@@ -52,7 +49,7 @@ const Login = () => {
                         <div className="auth-divider"><p>or log in with</p></div>
 
                         <AuthMethods />
-                        
+
                     </section>
 
                     <hr />

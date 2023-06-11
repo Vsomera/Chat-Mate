@@ -23,4 +23,8 @@ export const auth = getAuth(app)
 
 export const googleProvider = new GoogleAuthProvider() 
 export const gitHubProvider = new GithubAuthProvider()
-export const microsoftProvider = new OAuthProvider('microsoft.com');
+export const microsoftProvider = new OAuthProvider('microsoft.com')
+microsoftProvider.setCustomParameters({
+    prompt: "consent",
+    tenant: "common",
+})

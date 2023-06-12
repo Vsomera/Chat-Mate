@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"
 import { auth } from "../config/firebase"
-import { registerEmailPassword } from "../auth/authService";
+import { registerEmailPassword } from "../services/authService";
 import AuthMethods from "../components/AuthMethods";
 
 const Register = () => {
@@ -94,7 +94,7 @@ const Register = () => {
                         <form className="register-group" autoComplete="off">
                             <input
                                 id="name"
-                                className="input"
+                                className="auth-input"
                                 type="name"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
@@ -102,7 +102,7 @@ const Register = () => {
                             <div className="underline"></div>
                             <input
                                 id="email"
-                                className="input"
+                                className="auth-input"
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -110,7 +110,7 @@ const Register = () => {
                             <div className="underline"></div>
                             <input
                                 id="password"
-                                className="input"
+                                className="auth-input"
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -119,7 +119,7 @@ const Register = () => {
 
                             <input
                                 id="confirm-password"
-                                className="input"
+                                className="auth-input"
                                 type="password"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}

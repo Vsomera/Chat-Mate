@@ -72,7 +72,7 @@ const Login = () => {
                         <form className="login-group" autoComplete="off">
                             <input
                                 id="email"
-                                className="input"
+                                className="auth-input"
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -80,7 +80,7 @@ const Login = () => {
                             <div className="underline"></div>
                             <input
                                 id="password"
-                                className="input"
+                                className="auth-input"
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}

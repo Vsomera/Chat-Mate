@@ -1,7 +1,7 @@
 import { FcGoogle } from "react-icons/fc"
 import { VscGithub } from "react-icons/vsc"
 import { CgMicrosoft } from "react-icons/cg"
-import { signInGoogle, signInGithub, signInMS } from "../auth/authService"
+import { signInGoogle, signInGithub, signInMS } from "../services/authService"
 
 const AuthMethods = () => {
     return (

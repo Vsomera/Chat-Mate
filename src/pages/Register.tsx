@@ -67,7 +67,7 @@ const Register = () => {
     // remove br tag
     return (
         <>
-            <div className="auth-background">
+            <div className="background">
                 <div className="auth-container">
 
                     <section className="register-content">

@@ -45,7 +45,7 @@ const Login = () => {
 
     return (
         <>
-            <div className="auth-background">
+            <div className="background">
                 <div className="auth-container">
 
                     <section className="login-content">

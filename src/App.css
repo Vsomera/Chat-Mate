@@ -100,7 +100,8 @@ nav {
 .register-form *, 
 .register-content *, 
 .login-form * , 
-.login-content * {
+.login-content *,
+.chat-container *{
   background: transparent;
 }
 
@@ -246,7 +247,7 @@ hr {
 }
 
 /*input animations for login and register*/
-input {
+.auth-input {
   position: relative;
   display: inline-block;
   width: 100%;
@@ -258,7 +259,7 @@ input {
 input::-webkit-input-placeholder {
   color: #AAA;
 }
-.input:focus+.underline {
+.auth-input:focus+.underline {
   transform: scale(1);
 }
 .underline {
@@ -307,6 +308,10 @@ button:hover::after {
 
 /* Chat Page*/
 .chat-container {
+  border-radius: 10px;
+  background-color: rgba(62, 64, 75, 0.7);
   text-align: center;
+  width: 90%;
+  margin: 20px auto;
   height: 90vh;
 }

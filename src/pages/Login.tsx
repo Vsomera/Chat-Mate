@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react"
+import { useContext } from "react"
+import { UserContext } from "../context/userContext"
 import { FaSignInAlt } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -10,19 +12,19 @@ import AuthMethods from "../components/AuthMethods";
 
 const Login = () => {
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-
+    const { user } = useContext(UserContext)
     const navigate = useNavigate()
 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-         if (user !== null) {
-             navigate("/")
-         }
-        })
- 
-     }, [navigate])
+        // checks if a user is logged in
+        if (user) {
+            navigate("/")
+            console.log(user)
+        }
+    }, [user, navigate])
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const onSubmit = async () => {
         try {

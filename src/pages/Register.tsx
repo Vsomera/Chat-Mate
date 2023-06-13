@@ -1,28 +1,28 @@
 import { FaRegUser } from "react-icons/fa"
+import { useContext } from "react"
+import { UserContext } from "../context/userContext"
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"
-import { auth } from "../config/firebase"
 import { registerEmailPassword } from "../services/authService";
 import AuthMethods from "../components/AuthMethods";
 
 const Register = () => {
+    
+    const { user } = useContext(UserContext)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (user) {
+            // checks if a user is logged in
+            navigate("/")
+        }
+    }, [user, navigate])
+
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
-
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        // Checks if a user is logged in
-        auth.onAuthStateChanged((user) => {
-          if (user !== null) {
-            navigate("/");
-          }
-        })
-
-      }, [navigate])
 
     function checkStrongPassword(password: string) {
         // Verifies password strength

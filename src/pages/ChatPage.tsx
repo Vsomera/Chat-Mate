@@ -1,3 +1,5 @@
+import { useContext } from "react"
+import { UserContext } from "../context/userContext"
 import { auth } from "../config/firebase"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
@@ -8,16 +10,14 @@ const ChatPage = () => {
 
     const [room, setRoom] = useState("")    
     const [message, setMessage] = useState("")
+    const { user } = useContext(UserContext)
     const navigate = useNavigate()
-    
+
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-            // checks if a user is logged in
-            if (user == null) {
-                navigate("/login")
-            }
-        })
-    }, [navigate])  
+        if (!user) {
+            navigate("/login")
+        }
+    }, [user, navigate])
 
     const onSubmit = async (e : FormEvent) => {
         e.preventDefault()
@@ -42,7 +42,7 @@ const ChatPage = () => {
                             type="text" 
                             placeholder="Type Message"/>
                         <input 
-                            className="new-msg-input" 
+                            className="new-room-input" 
                             value={room}
                             onChange={(e) => setRoom(e.target.value)}
                             type="text" 

@@ -11,7 +11,7 @@ export const sendMessage = async (
     message: string,
     room: string) => {
     // sends message to specified room in firebase
-    if (message !== "" || room !== "") {
+    if (message !== "" && room !== "") {
         await addDoc(messagesRef, {
             text: message,
             createdAt: serverTimestamp(),

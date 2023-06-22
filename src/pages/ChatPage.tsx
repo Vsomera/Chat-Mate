@@ -1,30 +1,22 @@
 import { useContext } from "react"
 import { UserContext } from "../context/userContext"
-import { auth } from "../config/firebase"
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 import { FormEvent } from "react"
 import { sendMessage } from "../services/chatService"
 
 const ChatPage = () => {
 
+    const { user } = useContext(UserContext)
+
     const [room, setRoom] = useState("")    
     const [message, setMessage] = useState("")
-    const { user } = useContext(UserContext)
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        if (!user) {
-            navigate("/login")
-        }
-    }, [user, navigate])
 
     const onSubmit = async (e : FormEvent) => {
         e.preventDefault()
 
-        if (auth.currentUser) {
+        if (user) {
             // sends the message to the specified room
-            await sendMessage(auth.currentUser, message, room)
+            await sendMessage(user, message, room)
             setMessage("")
             setRoom("")
         }

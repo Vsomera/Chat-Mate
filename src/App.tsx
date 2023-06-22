@@ -1,7 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import { useState } from "react"
-import { auth } from "./config/firebase";
-import { User } from "firebase/auth";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { useContext } from "react"
 import { UserContext } from "./context/userContext";
 import 'react-toastify/dist/ReactToastify.css';
 import ChatPage from "./pages/ChatPage"
@@ -12,29 +10,33 @@ import './App.css'
 
 function App() {
 
-  const [user, setUser] = useState<User | null>(null)
-  auth.onAuthStateChanged((user) => {
-    if (user != null) {
-      setUser(user)
-    } else {
-      setUser(null)
+  interface ProtectedRouteProps {
+    children: React.ReactNode
+  }
+
+  const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+    const { user } = useContext(UserContext)
+
+    if (!user) {
+      // If a user is not logged in, redirect to the login page
+      return <Navigate to="/login" />
     }
-  })
+
+    return <>{children}</>
+  }
 
   return (
     <>
-      <UserContext.Provider value={{ user }}>
-        <Router>
-          <Navbar />
-          <div className="container">
-            <Routes>
-              <Route path="/" element={<ChatPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-            </Routes>
-          </div>
-        </Router>
-      </UserContext.Provider>
+      <Router>
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   )
 }

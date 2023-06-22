@@ -1,0 +1,19 @@
+.chat-container {
+    border-radius: 10px;
+    display: flex;
+    background-color: rgba(62, 64, 75, 0.7);
+    text-align: center;
+    width: 90%;
+    margin: 20px auto;
+    height: 90vh;
+}
+
+aside {
+    flex-grow: 1;
+    border: 1px solid white;
+}
+
+main {
+    flex-grow: 2;
+    border: 1px solid white;
+}

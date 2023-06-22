@@ -304,14 +304,3 @@ button:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-
-
-/* Chat Page*/
-.chat-container {
-  border-radius: 10px;
-  background-color: rgba(62, 64, 75, 0.7);
-  text-align: center;
-  width: 90%;
-  margin: 20px auto;
-  height: 90vh;
-}

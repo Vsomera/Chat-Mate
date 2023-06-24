@@ -1,5 +1,5 @@
 .chat-container {
-    border-radius: 10px;
+    border-radius: 15px;
     display: flex;
     background-color: rgba(62, 64, 75, 0.7);
     text-align: center;
@@ -10,10 +10,25 @@
 
 aside {
     flex-grow: 1;
-    border: 1px solid white;
+    background-color: rgba(41, 43, 54, 0.4) !important;
+    border-radius: 15px 0 0 15px; 
+}
+
+.side-topbar {
+    height: 4rem;
+    border-radius: 15px 0 0 0;
+}
+
+.search {
+    width: 80%; 
+    margin: 0 auto;
 }
 
 main {
     flex-grow: 2;
-    border: 1px solid white;
+}
+
+.chat-topbar {
+    height: 4rem;
+    border-radius: 0 15px 0 0;
 }

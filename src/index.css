@@ -41,6 +41,7 @@ aside {
 }
 .search-icon {
     vertical-align: middle;
+    cursor: pointer;
 }
 /* Search */
 .search {
@@ -49,7 +50,7 @@ aside {
 }
 
 .searched-user {
-    
+
 }
 
 main {

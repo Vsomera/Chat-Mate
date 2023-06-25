@@ -1,7 +1,10 @@
 import { useState } from "react"
+import { collection, doc, setDoc } from "firebase/firestore"; 
+
 
 const Search = () => {
 
+    // create a state with all the user's
     const [searchedUser, setSearchedUser] = useState("")
 
     return (
@@ -15,6 +18,11 @@ const Search = () => {
                 placeholder="Search for User..."/>
             <div className="underline"></div>
 
+            <div className="searched-user">
+                <img 
+                    src=""
+                    alt="" />
+            </div>
         </div>
     )
 }

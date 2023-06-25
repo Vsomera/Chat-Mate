@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { UserContext } from "../../context/userContext"
+import { UserContext } from "../context/userContext"
 import { HiOutlineSearch } from "react-icons/hi"
 import Search from "./Search"
 

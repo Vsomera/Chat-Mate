@@ -14,14 +14,42 @@ aside {
     border-radius: 15px 0 0 15px; 
 }
 
+/* SideTopbar*/
 .side-topbar {
     height: 4rem;
+    width: 100%;
     border-radius: 15px 0 0 0;
 }
-
+.side-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+}
+.side-content h2 {
+    display: flex;
+    align-items: center;
+}
+.profile-img {
+    margin-right: 1rem;
+    vertical-align: middle;
+    border-radius: 5rem;
+    height: 2rem;
+    width: 2rem;
+}
+.search-icon {
+    vertical-align: middle;
+}
+/* Search */
 .search {
     width: 80%; 
     margin: 0 auto;
+}
+
+.searched-user {
+    
 }
 
 main {

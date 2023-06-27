@@ -48,9 +48,23 @@ aside {
     width: 80%; 
     margin: 0 auto;
 }
-
 .searched-user {
-
+    margin-top: 15px;
+    width: 100%;
+    height: 3rem;
+}
+.searched-container {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(93, 95, 108, 0.5);
+    display: flex;
+}
+.searched-user-info {
+    text-align: start;
+}
+.searched-user-info p:nth-child(2) {
+    font-size: xx-small;
+    color: grey;
 }
 
 main {

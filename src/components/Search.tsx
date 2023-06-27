@@ -11,6 +11,7 @@ const Search = () => {
 
     const [searchedUsername, setSearchedUsername] = useState("")
     const [searchedUsers, setSearchedUsers] = useState<User[]>([])
+    const [showNoUsers, setShowNoUsers] = useState(false) // state for hiding and showing "no users found" text
     const [isLoading, setIsLoading] = useState(false)
 
     const handleEnter = async (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -37,6 +38,7 @@ const Search = () => {
                 users.push(doc.data() as User)
             })
 
+            setShowNoUsers(true)
             setSearchedUsers(users)
             setSearchedUsername("")
         }
@@ -56,23 +58,31 @@ const Search = () => {
 
             <div className="searched-users">
 
-                {searchedUsers
-                    .filter((otherUser: User) => otherUser.uid != user?.uid) // filters out the signed in user on search
-                    .map((otherUser: User) => {
-                        return (
-                            <div className="searched-user" key={otherUser.uid}>
-                                <div className="searched-container">
-                                    <img
-                                        src={otherUser.photoURL || ""}
-                                        className="profile-img" />
-                                    <div className="searched-user-info">
-                                        <p>{otherUser.displayName}</p>
-                                        <p>{otherUser.email}</p>
+                {!isLoading
+                    ? searchedUsers.length > 0 && searchedUsers[0]?.uid != user?.uid ?
+                        searchedUsers
+                            .filter((otherUser: User) => otherUser.uid != user?.uid) // filters out the signed-in user on search
+                            .map((otherUser: User) => {
+                                return (
+                                    <div className="searched-user" key={otherUser.uid}>
+                                        <div className="searched-container">
+                                            <img
+                                                src={otherUser.photoURL || ""}
+                                                className="profile-img" />
+                                            <div className="searched-user-info">
+                                                <p>{otherUser.displayName}</p>
+                                                <p>{otherUser.email}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        )
-                    })
+                                )
+                            })
+                        : showNoUsers && <div>no users found</div>
+
+                    : <ReactLoading
+                        className="loading"
+                        type={"bubbles"}
+                        color={"white"} />
                 }
 
             </div>

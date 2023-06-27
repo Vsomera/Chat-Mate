@@ -13,7 +13,7 @@ const SideTopbar = () => {
         <div className="side-topbar">
             <div className="side-content">
                 <h2>
-                    <img src={user?.photoURL || ""} className="profile-img" /> Chats
+                    <img src={user?.photoURL || ""} referrerPolicy="no-referrer" className="profile-img" /> Chats
                 </h2>
 
                 <h3 onClick={

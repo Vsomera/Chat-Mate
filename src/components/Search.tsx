@@ -3,7 +3,9 @@ import { collection, getDocs, query, where } from "firebase/firestore"
 import { UserContext } from "../context/userContext"
 import { db } from "../config/firebase"
 import { User } from "firebase/auth"
-import ReactLoading from 'react-loading';
+import ReactLoading from 'react-loading'
+import SelectedUsers from "./SelectedUsers"
+// import { Checkbox } from "./Checkbox"
 
 const Search = () => {
 
@@ -11,6 +13,7 @@ const Search = () => {
 
     const [searchedUsername, setSearchedUsername] = useState("")
     const [searchedUsers, setSearchedUsers] = useState<User[]>([])
+    const [selectedUsers, setSelectedUsers] = useState<User[]>([]) // array for holding the selected users
     const [showNoUsers, setShowNoUsers] = useState(false) // state for hiding and showing "no users found" text
     const [isLoading, setIsLoading] = useState(false)
 
@@ -21,6 +24,21 @@ const Search = () => {
             await searchUsers()
             setIsLoading(false)
         }
+    }
+
+    const handleSelect = (otherUser: User) => {
+        // check if the user is already selected
+        const userExists = selectedUsers.some(selectUser => selectUser.uid === otherUser.uid)
+
+        if (!userExists) {
+            // adds user to state if the user doesn't exist
+            setSelectedUsers([...selectedUsers, otherUser])
+        } else {
+            // remove the user from the state if the user already exists
+            const removeUser = selectedUsers.filter((selectUsers) => otherUser.uid !== selectUsers.uid)
+            setSelectedUsers(removeUser)
+        }
+
     }
 
     const searchUsers = async () => {
@@ -64,15 +82,20 @@ const Search = () => {
                             .filter((otherUser: User) => otherUser.uid != user?.uid) // filters out the signed-in user on search
                             .map((otherUser: User) => {
                                 return (
-                                    <div className="searched-user" key={otherUser.uid}>
-                                        <div className="searched-container">
-                                            <img
-                                                src={otherUser.photoURL || ""}
-                                                className="profile-img" />
-                                            <div className="searched-user-info">
-                                                <p>{otherUser.displayName}</p>
-                                                <p>{otherUser.email}</p>
-                                            </div>
+                                    <div
+                                        className={`searched-container 
+                                            ${selectedUsers.some(selectUser => selectUser.uid === otherUser.uid) // checks if user is in the selectUser state array
+                                                // animate border outline if user is selected
+                                                ? "user-selected" 
+                                                : "user-deselected"}`}
+                                        onClick={() => handleSelect(otherUser)}
+                                        key={otherUser.uid} >
+                                        <img
+                                            src={otherUser.photoURL || ""}
+                                            className="profile-img" />
+                                        <div className="searched-user-info">
+                                            <p>{otherUser.displayName}</p>
+                                            <p>{otherUser.email}</p>
                                         </div>
                                     </div>
                                 )
@@ -86,6 +109,9 @@ const Search = () => {
                 }
 
             </div>
+            <SelectedUsers
+                selectedUsers={selectedUsers}
+                setSelectedUsers={setSelectedUsers} />
         </div>
     )
 }

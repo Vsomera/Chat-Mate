@@ -27,14 +27,14 @@ const Search = () => {
     }
 
     const handleSelect = (otherUser: User) => {
-        // check if the user is already selected
+        // check if the user already exists in array state
         const userExists = selectedUsers.some(selectUser => selectUser.uid === otherUser.uid)
 
         if (!userExists) {
-            // adds user to state if the user doesn't exist
+            // adds user to array state if the user doesn't exist
             setSelectedUsers([...selectedUsers, otherUser])
         } else {
-            // remove the user from the state if the user already exists
+            // remove the user from the array state if the user already exists
             const removeUser = selectedUsers.filter((selectUsers) => otherUser.uid !== selectUsers.uid)
             setSelectedUsers(removeUser)
         }

@@ -5,7 +5,6 @@ import { db } from "../config/firebase"
 import { User } from "firebase/auth"
 import ReactLoading from 'react-loading'
 import SelectedUsers from "./SelectedUsers"
-// import { Checkbox } from "./Checkbox"
 
 const Search = () => {
 

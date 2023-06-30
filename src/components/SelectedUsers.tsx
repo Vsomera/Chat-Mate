@@ -43,11 +43,9 @@ const SelectedUsers = (props: Props) => {
                         {props.selectedUsers.map((user: User) => {
                             return (
                                 <div className="selected-user" key={user.uid}>
-                                    {!isLoading &&
-                                        <IoClose
-                                            className="remove-icon"
-                                            onClick={() => removeSelected(user)} />
-                                    }
+                                    <IoClose
+                                        className="remove-icon"
+                                        onClick={() => removeSelected(user)} />
                                     <p>{user.displayName}</p>
                                 </div>
                             )

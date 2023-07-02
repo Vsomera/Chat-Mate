@@ -34,7 +34,7 @@ aside {
     display: flex;
     align-items: center;
 }
-.profile-img {
+.profile-img, .chat-img {
     margin-right: 1rem;
     vertical-align: middle;
     border-radius: 5rem;
@@ -128,6 +128,25 @@ aside {
 .send-icon {
     margin: auto;
     cursor: pointer;
+}
+
+
+/* Chats component */
+.chats {
+    width: 80%;
+    margin: 0 auto;
+} 
+.userChat {
+    background-color: rgb(93, 95, 108, 0.5);
+    margin-top: 0.5rem;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    text-align: start;
+}
+.chat-info p:nth-child(2) {
+    font-size: x-small;
+    color: grey;
 }
 
 main {

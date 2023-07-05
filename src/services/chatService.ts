@@ -48,7 +48,7 @@ export const createNewChat = async (users: User[]) => {
                     // array of chat users excluding the currentUser
                     .map((chatUser) => ({
                         displayName : chatUser.displayName,
-                        photoUrl : chatUser.photoURL,
+                        photoURL : chatUser.photoURL,
                         uid : chatUser.uid
                     }))
 

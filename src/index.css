@@ -41,6 +41,9 @@ aside {
     height: 2rem;
     width: 2rem;
 }
+.group-img {
+    
+}
 .search-icon {
     vertical-align: middle;
     cursor: pointer;
@@ -135,10 +138,11 @@ aside {
 .chats {
     width: 80%;
     margin: 0 auto;
+    margin-top: 2rem;
 } 
 .userChat {
     background-color: rgb(93, 95, 108, 0.5);
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     border-radius: 10px;
     padding: 10px;
     display: flex;

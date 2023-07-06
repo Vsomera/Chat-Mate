@@ -16,7 +16,7 @@ const SideTopbar = (props : Props) => {
         <div className="side-topbar">
             <div className="side-content">
                 <h2>
-                    <img src={user?.photoURL || ""} referrerPolicy="no-referrer" className="profile-img" /> Chats
+                    <img src={user?.photoURL || ""} referrerPolicy="no-referrer" className="profile-img" /> {user?.displayName}
                 </h2>
 
                 <h3 onClick={

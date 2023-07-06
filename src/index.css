@@ -34,16 +34,14 @@ aside {
     display: flex;
     align-items: center;
 }
-.profile-img, .chat-img {
+.profile-img {
     margin-right: 1rem;
     vertical-align: middle;
     border-radius: 5rem;
     height: 2rem;
     width: 2rem;
 }
-.group-img {
-    
-}
+
 .search-icon {
     vertical-align: middle;
     cursor: pointer;
@@ -136,21 +134,48 @@ aside {
 
 /* Chats component */
 .chats {
+    height: 80%;
     width: 80%;
     margin: 0 auto;
     margin-top: 2rem;
+    text-align: start;
 } 
 .userChat {
+    height: 3.5rem;
     background-color: rgb(93, 95, 108, 0.5);
     margin-top: 1rem;
     border-radius: 10px;
     padding: 10px;
     display: flex;
     text-align: start;
+    align-items: center;
 }
 .chat-info p:nth-child(2) {
     font-size: x-small;
     color: grey;
+}
+
+.img-container {
+    height: 2.2rem;
+    width: 2.2rem;
+    margin: 0 1rem 0 2rem;
+}
+.chat-img {
+    vertical-align: middle;
+    border-radius: 5rem;
+    height: inherit;
+    width: inherit;
+}
+.group-img {
+    border-radius: 1rem;
+    vertical-align: middle;
+    height: 1.8rem;
+    width: 1.8rem;
+}
+.group-img:nth-child(2) {
+    position: relative;
+    left: 0.4rem;
+    bottom: 1.4rem;
 }
 
 main {

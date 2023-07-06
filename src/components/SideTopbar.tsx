@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { UserContext } from "../context/userContext"
 import { HiOutlineSearch } from "react-icons/hi"
+import { MdOutlineClose } from "react-icons/md"
 import Search from "./Search"
 
 interface Props {
@@ -21,9 +22,12 @@ const SideTopbar = (props : Props) => {
 
                 <h3 onClick={
                     () => props.toggleView 
-                        ? props.setToggleView(false)
-                        : props.setToggleView(true)}>
-                            <HiOutlineSearch className="search-icon" /></h3>
+                        ? props.setToggleView(false) // show chats
+                        : props.setToggleView(true)} // show search
+                        > 
+                            {!props.toggleView 
+                                ? <HiOutlineSearch className="search-icon" /> 
+                                : <MdOutlineClose className="search-icon"/> }</h3>
             </div>
             { props.toggleView  && <Search /> }
         </div>

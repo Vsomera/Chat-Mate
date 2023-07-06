@@ -21,13 +21,7 @@ export const createNewChat = async (users: User[]) => {
         .sort((a, b) => parseInt(a, 10) - parseInt(b, 10)) // sorts array numerically
         .reduce((result, userId) => {
             for (let i = 0; i < userId.length; i++) {
-
-                if (result.join("").length < 56) {
                     result[i] = (result[i] || "") + userId[i]
-
-                } else {
-                    break // stop when id reaches 56 characters
-                }
             }
             return result
         }, ['']).join("")

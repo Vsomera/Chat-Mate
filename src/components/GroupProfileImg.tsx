@@ -15,6 +15,7 @@ const GroupProfileImg = (props : Props) => {
                             <img 
                                 className="group-img"
                                 src={user.photoURL || ""} 
+                                referrerPolicy="no-referrer"
                                 alt="" />
                         )
                     })

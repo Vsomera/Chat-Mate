@@ -13,6 +13,7 @@ const GroupProfileImg = (props : Props) => {
                     props.chatUsers.map((user) => {
                         return (
                             <img 
+                                key={user.uid}
                                 className="group-img"
                                 src={user.photoURL || ""} 
                                 referrerPolicy="no-referrer"

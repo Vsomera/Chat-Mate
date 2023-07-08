@@ -1,10 +1,10 @@
 import { UserContext } from "../context/userContext"
 import { useContext, useState, useEffect } from "react"
+import { ChatContext } from "../context/chatContext";
 import { db } from "../config/firebase";
 import { Timestamp, doc, onSnapshot } from "firebase/firestore";
 import { User } from "firebase/auth"
 import GroupProfileImg from "./GroupProfileImg"
-
 
 interface Props {
     toggleView: boolean
@@ -14,7 +14,13 @@ interface Props {
 const Chats = (props: Props) => {
 
     const { user } = useContext(UserContext)
+    const { setChatId } = useContext(ChatContext)
     const [userChats, setUserChats] = useState<React.ReactNode[]>([]) // holds user chats for the current logged in user
+
+    const changeChat = (chatId: string) => {
+        // changes the context chatId
+        setChatId(chatId)
+    }
 
     useEffect(() => {
         const unSub = onSnapshot(doc(db, "userChats", user?.uid || ""), (doc) => {
@@ -37,7 +43,7 @@ const Chats = (props: Props) => {
                 const lastMessage = chat[1].lastMessage // last sent message from the chat
 
                 return (
-                    <div className="userChat" key={chatId}>
+                    <div className="userChat" key={chatId} onClick={() => changeChat(chatId)}>
                         <div className="img-container">
                             {chatUsers.length <= 1
                                 // if length of users is less than 1 show the user pfp
@@ -70,7 +76,7 @@ const Chats = (props: Props) => {
         <>
             {!props.toggleView &&
                 <div className="chats">
-                    <p>Messages</p>
+                    {userChats.length > 0 ? <p>Messages</p> : <p>you have no messages</p>}
                     {userChats}
                 </div>
             }

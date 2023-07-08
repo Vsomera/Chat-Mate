@@ -50,7 +50,7 @@ export const createNewChat = async (users: User[]) => {
                     // creates a new userChat for each user
                     [combinedId]: {
                         date: serverTimestamp(),
-                        lastMessage: "",
+                        lastMessage: "Chat created 🎉",
                         chatUsers: chatUsers
                     }
                 }, { merge: true })

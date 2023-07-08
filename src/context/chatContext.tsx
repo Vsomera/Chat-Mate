@@ -8,8 +8,7 @@ interface Props {
 }
 
 export const ChatContext = createContext<{ chat: string; setChat: SetStateFunction<string>}>({
-    // default values for chatId
-    chat: "",
+    chat: "", // holds the chatId
     setChat: () => {null}
 })
 

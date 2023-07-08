@@ -4,12 +4,12 @@ import { ChatContext } from "../context/chatContext"
 
 const Chat = () => {
 
-    const { chatId } = useContext(ChatContext)
+    const { chat } = useContext(ChatContext)
 
     return (
         <main>
             <ChatTopbar />
-            {chatId}
+            {chat}
         </main>
     )
 }

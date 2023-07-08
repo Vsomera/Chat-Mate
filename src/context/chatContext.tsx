@@ -7,17 +7,17 @@ interface Props {
     initial?: string
 }
 
-export const ChatContext = createContext<{ chatId: string; setChatId: SetStateFunction<string>}>({
+export const ChatContext = createContext<{ chat: string; setChat: SetStateFunction<string>}>({
     // default values for chatId
-    chatId: "",
-    setChatId: () => {null}
+    chat: "",
+    setChat: () => {null}
 })
 
 export const ChatContextProvider: FC<Props> = ({ children, initial = "" }) => {
-    const [chatId, setChatId] = useState(initial)
+    const [chat, setChat] = useState(initial)
 
     return (
-        <ChatContext.Provider value={{ chatId, setChatId }}>
+        <ChatContext.Provider value={{ chat, setChat }}>
             {children}
         </ChatContext.Provider>
     )

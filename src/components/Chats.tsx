@@ -7,6 +7,7 @@ import { User } from "firebase/auth"
 import GroupProfileImg from "./GroupProfileImg"
 
 interface Props {
+    // imported states for toggling the search and chats view
     toggleView: boolean
     setToggleView: (arg: boolean) => void
 }

@@ -4,7 +4,7 @@ import Chats from "./Chats"
 
 const Sidebar = () => {
     // false : show the chats component
-    // true : show the search search
+    // true : show the search component
     const [toggleView, setToggleView] = useState(false) // toggles the search and chats view
 
     return (

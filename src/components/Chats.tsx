@@ -15,12 +15,12 @@ interface Props {
 const Chats = (props: Props) => {
 
     const { user } = useContext(UserContext)
-    const { setChatId } = useContext(ChatContext)
+    const { selectedChat, setSelectedChat } = useContext(ChatContext)
     const [userChats, setUserChats] = useState<React.ReactNode[]>([]) // holds user chats for the current logged in user
 
     const changeChat = (chatId: string) => {
         // changes the context chatId
-        setChatId(chatId)
+        setSelectedChat(chatId)
     }
 
     useEffect(() => {
@@ -35,7 +35,7 @@ const Chats = (props: Props) => {
                 return dateB - dateA
             })
 
-            const chatsData = rawData.map((chat) => { // map through all chats from the current logged in user
+            const chatsData =  rawData.map((chat) => { // map through all chats from the current logged in user
 
                 const chatId = chat[0]
                 const chatPhoto = chat[1].chatUsers[0].photoURL
@@ -44,7 +44,10 @@ const Chats = (props: Props) => {
                 const lastMessage = chat[1].lastMessage // last sent message from the chat
 
                 return (
-                    <div className="userChat" key={chatId} onClick={() => changeChat(chatId)}>
+                    <div className={`userChat ${selectedChat === chatId ? "selected-chat" : "deselected-chat"}`} // TODO : Fix why classes are not adding
+                        key={chatId} 
+                        onClick={() => changeChat(chatId)}>
+
                         <div className="img-container">
                             {chatUsers.length <= 1
                                 // if length of users is less than 1 show the user pfp
@@ -60,6 +63,7 @@ const Chats = (props: Props) => {
                             <p>{chatName}</p>
                             <p>{lastMessage}</p>
                         </div>
+
                     </div>
                 )
 
@@ -71,7 +75,7 @@ const Chats = (props: Props) => {
             unSub()
         }
 
-    }, [user]) // listen for changes realtime
+    }, [user, changeChat]) // listen for changes realtime, and check when a chat is selected
 
     return (
         <>

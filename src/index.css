@@ -76,11 +76,11 @@ aside {
         border-color: transparent;
     }
 }
-.user-selected {
+.user-selected, .selected-chat {
     border: 0.1px solid transparent;
     animation: fadeIn 0.5s forwards;
 }
-.user-deselected {
+.user-deselected, .deselected-chat {
     border: 0.1px solid transparent;
     animation: fadeOut 0.5s forwards;
 }

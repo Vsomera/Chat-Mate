@@ -26,7 +26,9 @@ const Chats = (props: Props) => {
     useEffect(() => {
         const unSub = onSnapshot(doc(db, "userChats", user?.uid || ""), (doc) => {
             // fetch chats of the current logged in user
-            const rawData = Object.entries(doc.data() as Record<string, { lastMessage: string, chatUsers: User[], date: Timestamp }>)
+            const rawData = Object.entries(doc.data() as Record<string, { 
+                chatName: string, lastMessage: string, chatUsers: User[], date: Timestamp 
+            }>)
 
             rawData.sort((a, b) => {
                 // sort in descending order (newest to oldest)
@@ -38,9 +40,9 @@ const Chats = (props: Props) => {
             const chatsData =  rawData.map((chat) => { // map through all chats from the current logged in user
 
                 const chatId = chat[0]
-                const chatPhoto = chat[1].chatUsers[0].photoURL
+                const chatPhoto = chat[1].chatUsers[0].photoURL // TODO : fetch chatPhoto from db
                 const chatUsers = chat[1].chatUsers // array of all users in the chat
-                const chatName = chatUsers.length < 2 ? chatUsers[0].displayName : "New Group Chat"
+                const chatName = chat[1].chatName
                 const lastMessage = chat[1].lastMessage // last sent message from the chat
 
                 return (

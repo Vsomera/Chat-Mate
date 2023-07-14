@@ -46,9 +46,13 @@ export const createNewChat = async (users: User[]) => {
                         uid : chatUser.uid
                     }))
 
+                // creates a chatName based on the number of users in the chatUsers array
+                const chatName = chatUsers.length > 1 ? "New Group Chat" : chatUsers[0].displayName
+
                 await setDoc(doc(db, "userChats", user.uid), {
                     // creates a new userChat for each user
                     [combinedId]: {
+                        chatName : chatName,
                         date: serverTimestamp(),
                         lastMessage: "Chat created 🎉",
                         chatUsers: chatUsers

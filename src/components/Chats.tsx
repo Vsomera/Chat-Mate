@@ -48,7 +48,7 @@ const Chats = (props: Props) => {
                 return (
                     <div className={`userChat ${selectedChat === chatId ? "selected-chat" : "deselected-chat"}`} // TODO : Fix why classes are not adding
                         key={chatId} 
-                        onClick={() => changeChat(chatId)}>
+                        onClick={() => {chatId !== selectedChat ? changeChat(chatId) : setSelectedChat("")}}>
 
                         <div className="img-container">
                             {chatUsers.length <= 1

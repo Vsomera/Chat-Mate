@@ -184,7 +184,29 @@ main {
     width: 15rem;
 }
 
+/* Chat Topbar */
 .chat-topbar {
     height: 4rem;
     border-radius: 0 15px 0 0;
+}
+
+.top-content {
+    width: 85%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat-name {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.chat-options * {
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 0.8rem;
 }

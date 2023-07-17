@@ -75,9 +75,11 @@ const Chats = (props: Props) => {
 
         return () => {
             unSub()
+            console.log(selectedChat)
         }
 
-    }, [user, changeChat]) // listen for changes realtime, and check when a chat is selected
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedChat]) // listen for changes realtime, and check when a chat is selected
 
     return (
         <>

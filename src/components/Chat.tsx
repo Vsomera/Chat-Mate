@@ -1,15 +1,12 @@
 import ChatTopbar from "./ChatTopbar"
-import { useContext } from "react"
-import { ChatContext } from "../context/chatContext"
+import Messages from "./Messages"
 
 const Chat = () => {
-
-    const { chat } = useContext(ChatContext)
 
     return (
         <main>
             <ChatTopbar />
-            {chat}
+            <Messages />
         </main>
     )
 }

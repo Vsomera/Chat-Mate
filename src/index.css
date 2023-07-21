@@ -210,3 +210,53 @@ main {
     vertical-align: middle;
     margin-right: 0.8rem;
 }
+
+/* Messages component*/
+.messages {
+    margin: 0 auto;
+    height: 80%;
+    width: 85%;
+    overflow: auto;
+}
+
+/* Message component */
+.message {
+    margin-bottom: 0.5rem;
+    display: flex;
+}
+.msg-pfp {
+    height: 2.1rem;
+    width: 2.1rem;
+    border-radius: 5rem;
+    vertical-align: middle;
+}
+
+/* message from other user*/
+.msg-content {
+    text-align: start;
+    margin-left: 0.8rem;
+}
+.msg-text {
+    font-size: small;
+    padding: 0.5rem 0.8rem;
+    max-width: 30rem;
+}
+.msg-content .msg-text {
+    background-color: rgb(93, 95, 108, 0.7);
+    border-radius: 1rem 1rem 1rem 0;
+}
+.msg-content p:nth-child(2) {
+    font-size: xx-small;
+    color: gray;
+}
+
+/* message from logged in user*/
+.me {
+    justify-content: flex-end; 
+    text-align: end;
+}
+.me .msg-text {
+    background-color: #1990FF;
+    border-radius: 1rem 1rem 0 1rem;
+    text-align: start;
+}

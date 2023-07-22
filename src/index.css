@@ -179,9 +179,16 @@ aside {
     bottom: 1.4rem;
 }
 
+/* Chat Component */
 main {
     flex-grow: 2;
     width: 15rem;
+}
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 95%;
 }
 
 /* Chat Topbar */
@@ -259,4 +266,28 @@ main {
     background-color: #1990FF;
     border-radius: 1rem 1rem 0 1rem;
     text-align: start;
+}
+
+/* Msg Input Component */
+.msg-input {
+    width: 85%;
+    height: 4rem;
+    margin: 0 auto;
+    background-color: rgba(41, 43, 54, 0.5);
+    border-radius: 1rem;
+}
+.input-container {
+    display: flex;
+    height: 100%;
+    width: 95%;
+    margin: 0 auto;
+}
+.input-container .send-icon {
+    height: 1.2rem;
+    width: 1.2rem;
+}
+.msg-input input {
+    border: none;
+    outline: none;
+    width: 98%;
 }

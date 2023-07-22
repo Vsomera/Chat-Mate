@@ -1,7 +1,7 @@
 import { User } from "firebase/auth"
 import { db } from "../config/firebase"
 import { toast } from "react-toastify"
-import { setDoc, getDoc, doc, serverTimestamp } from "firebase/firestore"
+import { setDoc, getDoc, doc, serverTimestamp, arrayUnion, Timestamp, updateDoc } from "firebase/firestore"
 
 export const createNewChat = async (users: User[]) => {
 
@@ -21,7 +21,7 @@ export const createNewChat = async (users: User[]) => {
         .sort((a, b) => parseInt(a, 10) - parseInt(b, 10)) // sorts array numerically
         .reduce((result, userId) => {
             for (let i = 0; i < userId.length; i++) {
-                    result[i] = (result[i] || "") + userId[i]
+                result[i] = (result[i] || "") + userId[i]
             }
             return result
         }, ['']).join("")
@@ -38,12 +38,12 @@ export const createNewChat = async (users: User[]) => {
             // creates a new chat for each user(s) in the array
             users.map(async (user) => {
 
-                const chatUsers = users.filter((chatUser) => chatUser.uid !== user.uid) 
+                const chatUsers = users.filter((chatUser) => chatUser.uid !== user.uid)
                     // array of chat users excluding the currentUser
                     .map((chatUser) => ({
-                        displayName : chatUser.displayName,
-                        photoURL : chatUser.photoURL,
-                        uid : chatUser.uid
+                        displayName: chatUser.displayName,
+                        photoURL: chatUser.photoURL,
+                        uid: chatUser.uid
                     }))
 
                 // creates a chatName based on the number of users in the chatUsers array
@@ -52,7 +52,7 @@ export const createNewChat = async (users: User[]) => {
                 await setDoc(doc(db, "userChats", user.uid), {
                     // creates a new userChat for each user
                     [combinedId]: {
-                        chatName : chatName,
+                        chatName: chatName,
                         date: serverTimestamp(),
                         lastMessage: "Chat created 🎉",
                         chatUsers: chatUsers
@@ -71,5 +71,24 @@ export const createNewChat = async (users: User[]) => {
 
     } else {
         return toast.error("Chat already exists")
+    }
+}
+
+export const sendNewMessage = async (sender: string | undefined, message: string, selectedChat: string) => {
+    try {
+        // send a new message to firebase firestore in messages array
+        if (sender) {
+            await updateDoc(doc(db, "chats", selectedChat), {
+                messages: arrayUnion({
+                    date: Timestamp.now(),
+                    senderId: sender,
+                    text: message
+                })
+            })
+        } else {
+            console.log("Invalid user")
+        }
+    } catch (err: unknown) {
+        console.log(err)
     }
 }

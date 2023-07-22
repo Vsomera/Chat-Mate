@@ -1,12 +1,16 @@
 import ChatTopbar from "./ChatTopbar"
 import Messages from "./Messages"
+import MsgInput from "./MsgInput"
 
 const Chat = () => {
 
     return (
         <main>
-            <ChatTopbar />
-            <Messages />
+            <div className="main-content">
+                <ChatTopbar />
+                <Messages />
+                <MsgInput />
+            </div>
         </main>
     )
 }

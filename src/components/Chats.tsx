@@ -75,7 +75,6 @@ const Chats = (props: Props) => {
 
         return () => {
             unSub()
-            console.log(selectedChat)
         }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

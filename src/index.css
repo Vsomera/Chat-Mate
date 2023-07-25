@@ -224,6 +224,8 @@ main {
     height: 80%;
     width: 85%;
     overflow: auto;
+    will-change: transform;
+    scroll-behavior: smooth;
 }
 /* Custom Scrollbar Styles*/
 ::-webkit-scrollbar {

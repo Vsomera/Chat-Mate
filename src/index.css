@@ -225,6 +225,14 @@ main {
     width: 85%;
     overflow: auto;
 }
+/* Custom Scrollbar Styles*/
+::-webkit-scrollbar {
+    width: 0.5rem; 
+  }
+::-webkit-scrollbar-thumb {
+    background-color: rgba(93, 95, 108, 0.7); 
+    border-radius: 1rem;  
+}
 
 /* Message component */
 .message {
@@ -261,6 +269,7 @@ main {
 .me {
     justify-content: flex-end; 
     text-align: end;
+    margin-right: 0.2rem;
 }
 .me .msg-text {
     background-color: #1990FF;

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState, useRef } from "react"
 import { db } from "../config/firebase"
 import { Timestamp, doc, onSnapshot } from "firebase/firestore"
 import { ChatContext } from "../context/chatContext"
@@ -9,6 +9,8 @@ const Messages = () => {
 
     const { selectedChat } = useContext(ChatContext)
     const [messages, setMessages] = useState<React.ReactNode[]>([]) // holds the selected chat message
+
+    const messagesRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         try {
@@ -31,7 +33,6 @@ const Messages = () => {
                     })
 
                     setMessages(messagesData)
-
                 })
 
                 return () => {
@@ -45,10 +46,17 @@ const Messages = () => {
 
     }, [selectedChat])
 
+    useEffect(() => {
+        if (messagesRef.current) {
+            // scroll to the bottom of messages when a new message is added
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight
+        }
+    }, [messages])
+
 
     return (
         <>
-            <div className="messages">
+            <div className="messages" ref={messagesRef} >
                 {messages}
             </div>
         </>

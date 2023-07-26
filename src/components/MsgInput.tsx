@@ -1,13 +1,7 @@
 import { useState, useContext } from "react"
 import EmojiPicker, {
     EmojiStyle,
-    SkinTones,
-    Theme,
-    Categories,
     EmojiClickData,
-    Emoji,
-    SuggestionMode,
-    SkinTonePickerLocation
 } from "emoji-picker-react";
 import { HiEmojiHappy } from "react-icons/hi"
 import { BsSendFill } from "react-icons/bs"
@@ -20,16 +14,15 @@ const MsgInput = () => {
 
     const [message, setMessage] = useState("")
     const [showEmojiPicker, setEmojiPicker] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
     const { selectedChat } = useContext(ChatContext)
     const { user } = useContext(UserContext)
 
     const sendMessage = async () => {
         // send a message to the database
-        if (message) {
-            setIsLoading(true)
+        if (message.trim() !== "") {
             await sendNewMessage(user?.uid, message, selectedChat)
-            setIsLoading(false)
+            setMessage("")
+            setEmojiPicker(false)
         }
     }
 

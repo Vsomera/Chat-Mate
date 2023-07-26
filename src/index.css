@@ -302,3 +302,24 @@ main {
     outline: none;
     width: 98%;
 }
+.msg-input .send-icon, 
+.emoji-icon {
+    margin: auto;
+    height: 1.8rem;
+    width: 1.8rem;
+}
+.emoji-icon {
+    cursor: pointer;
+    height: 2.1rem;
+    width: 2.1rem;
+    margin-right: 1rem;
+}
+/*Emoji Picker Component*/
+.emoji-picker {
+    position: absolute;
+    bottom: 22%;
+}
+.epr-emoji-category-label {
+    background-color: transparent !important;
+    color: white !important;
+}

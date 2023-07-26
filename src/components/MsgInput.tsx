@@ -37,31 +37,33 @@ const MsgInput = () => {
 
     return (
         <>
-            <div className="msg-input">
-                <div className="input-container">
+            { selectedChat && 
+                <div className="msg-input">
+                    <div className="input-container">
 
-                    {showEmojiPicker &&
-                        <div className="emoji-picker">
-                            <EmojiPicker
-                                emojiStyle={EmojiStyle.NATIVE}
-                                onEmojiClick={selectEmoji} />
-                        </div>
-                    }
+                        {showEmojiPicker &&
+                            <div className="emoji-picker">
+                                <EmojiPicker
+                                    emojiStyle={EmojiStyle.NATIVE}
+                                    onEmojiClick={selectEmoji} />
+                            </div>
+                        }
 
-                    <input
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        type="text" />
-                    <HiEmojiHappy
-                        className="emoji-icon"
-                        onClick={() => showEmojiPicker
-                            ? setEmojiPicker(false)
-                            : setEmojiPicker(true)} />
-                    <BsSendFill
-                        className="send-icon"
-                        onClick={() => sendMessage()} />
+                        <input
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            type="text" />
+                        <HiEmojiHappy
+                            className="emoji-icon"
+                            onClick={() => showEmojiPicker
+                                ? setEmojiPicker(false)
+                                : setEmojiPicker(true)} />
+                        <BsSendFill
+                            className="send-icon"
+                            onClick={() => sendMessage()} />
+                    </div>
                 </div>
-            </div>
+            }
         </>
     )
 }

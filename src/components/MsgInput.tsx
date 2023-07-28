@@ -14,15 +14,17 @@ const MsgInput = () => {
 
     const [message, setMessage] = useState("")
     const [showEmojiPicker, setEmojiPicker] = useState(false)
-    const { selectedChat } = useContext(ChatContext)
+    const { selectedChat, chatUsers } = useContext(ChatContext)
     const { user } = useContext(UserContext)
 
     const sendMessage = async () => {
         // send a message to the database
-        if (message.trim() !== "") {
-            await sendNewMessage(user?.uid, message, selectedChat)
-            setMessage("")
-            setEmojiPicker(false)
+        if (user) {
+            if (message.trim() !== "") {
+                await sendNewMessage(user?.uid, message, selectedChat, [...chatUsers, user])
+                setMessage("")
+                setEmojiPicker(false)
+            }
         }
     }
 
@@ -37,7 +39,7 @@ const MsgInput = () => {
 
     return (
         <>
-            { selectedChat && 
+            {selectedChat &&
                 <div className="msg-input">
                     <div className="input-container">
 

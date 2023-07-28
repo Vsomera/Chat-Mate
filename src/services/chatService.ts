@@ -74,10 +74,27 @@ export const createNewChat = async (users: User[]) => {
     }
 }
 
-export const sendNewMessage = async (sender: string | undefined, message: string, selectedChat: string) => {
+export const sendNewMessage = async (sender: string | undefined, message: string, selectedChat: string, chatUsers: User[]) => {
     try {
         // send a new message to firebase firestore in messages array
         if (sender) {
+
+            const formattedDate = Timestamp.now().toDate().toLocaleString(undefined, {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+            });
+
+            // update the last message
+            chatUsers.map(async (user) => {
+                await setDoc(doc(db, "userChats", user.uid), {
+                    [selectedChat]: {
+                        lastMessage: `${message} ◦ ${formattedDate}`
+                    }
+                }, { merge: true })
+            })
+
+            // send new message to the database
             await updateDoc(doc(db, "chats", selectedChat), {
                 messages: arrayUnion({
                     date: Timestamp.now(),
@@ -85,6 +102,7 @@ export const sendNewMessage = async (sender: string | undefined, message: string
                     text: message
                 })
             })
+
         } else {
             console.log("Invalid user")
         }

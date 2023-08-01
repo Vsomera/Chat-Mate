@@ -8,13 +8,14 @@ interface Props {
         id: string,
         date: Timestamp,
         senderId: string,
-        text: string
+        text?: string,
+        image?: string
     }
 }
 
 const Message = (props: Props) => {
 
-    const { id, date, senderId, text } = props.message
+    const { id, date, senderId, text, image } = props.message
     const { user } = useContext(UserContext)
     const { selectedChat, isLoading, chatUsers } = useContext(ChatContext)
 
@@ -33,18 +34,32 @@ const Message = (props: Props) => {
                     {user?.uid !== senderId &&
                         <img
                             className="msg-pfp"
-                            src={chatUsers.filter((chatUser) => chatUser.uid === senderId 
+                            src={chatUsers.filter((chatUser) => chatUser.uid === senderId
                                 && chatUser.photoURL)[0]?.photoURL || ""}
                             referrerPolicy="no-referrer"
                             alt="" />
                     }
-                    
+
                     <div className={`msg-content ${user?.uid == senderId && "me"}`}>
-                        <div className="msg-text">
-                            <p>{text}</p>
-                        </div>
-                        <p>{formattedDate}</p>
+
+                        {image &&
+                            <>
+                                <img className="sent-img" src={image} alt="" />
+                                <p>{formattedDate}</p>
+                            </>
+                        }
+
+                        {text &&
+                            <>
+                                <div className="msg-text">
+                                    <p>{text}</p>
+                                </div>
+                                <p>{formattedDate}</p>
+                            </>
+                        }
+
                     </div>
+
                 </div>
             }
         </>

@@ -1,7 +1,9 @@
 import { User } from "firebase/auth"
-import { db } from "../config/firebase"
+import { db, storage } from "../config/firebase"
 import { toast } from "react-toastify"
 import { setDoc, getDoc, doc, serverTimestamp, arrayUnion, Timestamp, updateDoc } from "firebase/firestore"
+import { v4 as uuid } from "uuid"
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 
 export const createNewChat = async (users: User[]) => {
 
@@ -108,5 +110,50 @@ export const sendNewMessage = async (sender: string | undefined, message: string
         }
     } catch (err: unknown) {
         console.log(err)
+    }
+}
+
+export const sendNewImage = async (image: File, selectedChat: string, senderId: string, chatUsers: User[]) => {
+    try {
+        // sends a new image to firebase storage
+        const storageRef = ref(storage, uuid())
+        const uploadTask = uploadBytesResumable(storageRef, image)
+
+        // access the image from storage by creating a link, then adding link to messages array
+        uploadTask.on("state_changed", () => {
+            // handle any state changes
+        }, (err: unknown) => {
+            if (err instanceof Error)
+                return toast.error(err.message)
+        }, () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                await updateDoc(doc(db, "chats", selectedChat), {
+                    messages: arrayUnion({
+                        date: Timestamp.now(),
+                        senderId: senderId,
+                        image: downloadURL
+                    })
+                })
+            })
+        })
+
+        const formattedDate = Timestamp.now().toDate().toLocaleString(undefined, {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+        })
+
+        chatUsers.map(async (user) => {
+            await setDoc(doc(db, "userChats", user.uid), {
+                [selectedChat]: {
+                    lastMessage: `Sent an Image 🖼️ ◦ ${formattedDate}`
+                }
+            }, { merge: true })
+        })
+
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            return toast.error(err.message)
+        }
     }
 }

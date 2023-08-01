@@ -20,7 +20,8 @@ const Messages = () => {
                         id: string,
                         date: Timestamp,
                         senderId: string,
-                        text: string
+                        text?: string,
+                        image? : string
                     }]>)
 
                     const messagesData = rawData[0][1].map((message) => { // array of all messages in the chat

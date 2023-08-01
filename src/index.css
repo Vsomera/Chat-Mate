@@ -247,6 +247,11 @@ main {
     border-radius: 5rem;
     vertical-align: middle;
 }
+.sent-img {
+    max-width: 20rem;
+    max-height: 20rem;
+    border-radius: 1rem;
+}
 
 /* message from other user*/
 .msg-content {
@@ -303,11 +308,22 @@ main {
     width: 98%;
 }
 .msg-input .send-icon, 
-.emoji-icon {
+.emoji-icon, .addImage-icon{
     margin: auto;
     height: 1.8rem;
     width: 1.8rem;
 }
+
+.img-toSend {
+    margin: 0.5rem;
+    border-radius: 1rem;
+}
+.addImage-icon {
+    margin: auto 1rem;
+    vertical-align: middle !important;
+    cursor: pointer;
+}
+
 .emoji-icon {
     cursor: pointer;
     height: 2.1rem;

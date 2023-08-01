@@ -34,7 +34,7 @@ const ChatTopbar = () => {
                     <p>{isLoading ? 
                             selectedChat ? <>Fetching Chat...</>
                             : <>Closing Chat...</>
-                        : chatName}</p>
+                        : chatName && chatName}</p>
                 </div>
 
                 <div className="chat-options">

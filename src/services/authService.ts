@@ -4,12 +4,13 @@ import { toast } from "react-toastify"
 import { signInWithPopup } from "firebase/auth"
 import { UserCredential } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
-import { ref, uploadBytesResumable } from "firebase/storage"
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 
 export const registerEmailPassword = async (
     username: string,
     email: string,
-    password: string) => {
+    password: string,
+    pfp?: File | null) => {
 
     try {
         // registers a user into firebase with email and password
@@ -19,6 +20,28 @@ export const registerEmailPassword = async (
         await updateProfile(newUser.user, {
             displayName: username
         })
+
+        if (pfp) {
+            // send the pfp to storage and attach the photoURL to the user
+            const storageRef = ref(storage, newUser.user.uid)
+            const uploadTask = uploadBytesResumable(storageRef, pfp)
+
+            // access the image from storage by creating a link, then adding link to messages array
+            uploadTask.on("state_changed", () => {
+                // handle any state changes
+            }, (err: unknown) => {
+                if (err instanceof Error)
+                    return toast.error(err.message)
+            }, () => {
+                getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                    // creates an accessible URL to get the user pfp
+                    await updateProfile(newUser.user, {
+                        photoURL: downloadURL
+                    })
+                })
+            })
+        }
+
         await addUsertoDb(newUser) // adds user to firestore database
         toast.success(`Welcome ${username}`)
 
@@ -99,7 +122,7 @@ const addUsertoDb = async (userInfo: UserCredential) => {
     }
 }
 
-const uploadUserProfileImage = async (photoURL: string | null, uid : string | null) => {
+const uploadUserProfileImage = async (photoURL: string | null, uid: string | null) => {
     try {
 
         if (photoURL) {
@@ -115,7 +138,7 @@ const uploadUserProfileImage = async (photoURL: string | null, uid : string | nu
                     reader.readAsDataURL(blob)
                 }))
 
-            const dataURLtoFile = (toDataURL : string, user : string) => {
+            const dataURLtoFile = (toDataURL: string, user: string) => {
                 // converts dataURL to a file
                 const arr = toDataURL.split(",")
                 const matchResult = arr[0].match(/:(.*?);/)
@@ -123,11 +146,11 @@ const uploadUserProfileImage = async (photoURL: string | null, uid : string | nu
                 const bstr = atob(arr[1])
                 let n = bstr.length
                 const u8arr = new Uint8Array(n)
-                while(n--){
+                while (n--) {
                     u8arr[n] = bstr.charCodeAt(n)
                 }
-                return new File([u8arr], user, {type:mime})
-                }
+                return new File([u8arr], user, { type: mime })
+            }
 
 
             if (uid) {

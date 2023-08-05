@@ -1,4 +1,5 @@
 import { FaRegUser } from "react-icons/fa"
+import { BiImageAdd } from "react-icons/bi"
 import { useContext } from "react"
 import { UserContext } from "../context/userContext"
 import { toast } from 'react-toastify';
@@ -8,7 +9,7 @@ import { registerEmailPassword } from "../services/authService";
 import AuthMethods from "../components/AuthMethods";
 
 const Register = () => {
-    
+
     const { user } = useContext(UserContext)
     const navigate = useNavigate()
 
@@ -19,6 +20,7 @@ const Register = () => {
         }
     }, [user, navigate])
 
+    const [pfp, setPfp] = useState<File | null>(null)
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -58,13 +60,15 @@ const Register = () => {
         if (password !== confirmPassword) {
             return toast.error("Passwords do not match")
         }
+        if (pfp === null) {
+            return toast.error("Please provide a profile picture")
+        }
 
         if (checkStrongPassword(password) === password) {
-            await registerEmailPassword(username, email, password)
+            await registerEmailPassword(username, email, password, pfp)
         }
     }
 
-    // remove br tag
     return (
         <>
             <div className="background">
@@ -125,6 +129,24 @@ const Register = () => {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 placeholder="Confirm Password" />
                             <div className="underline"></div>
+
+                            <input
+                                id="file"
+                                style={{ display : "none"}}
+                                className="user-pfp"
+                                type="file"
+                                accept="image/*" 
+                                onChange={(e) => setPfp(e.target.files?.[0] || null)}/>
+                            
+                            <label 
+                                className="add-pfp"
+                                htmlFor="file"
+                                style={{ display: "flex" }}>
+                                <BiImageAdd 
+                                    className="add-pfp-icon" />
+                                <p>Add profile picture</p>
+                            </label>
+
                         </form>
                         <button type="submit" onClick={onSubmit}>Sign In</button>
                     </section>

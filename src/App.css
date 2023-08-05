@@ -304,3 +304,17 @@ button:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+.add-pfp {
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+}
+.add-pfp p {
+  font-size: x-small;
+  color: #AAA
+}
+/* Add pfp icon*/
+.add-pfp-icon {
+  height: 2rem;
+}

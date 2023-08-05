@@ -32,7 +32,7 @@ const MsgInput = () => {
                 sendText()
             } else if (image) {
                 sendImage()
-            } else {
+            } else if (message.trim() !== "") {
                 sendText()
             }
         } catch (err: unknown) {

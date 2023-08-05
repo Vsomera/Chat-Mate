@@ -10,7 +10,7 @@ const Navbar = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    const { setSelectedChat } = useContext(ChatContext)
+    const { setSelectedChat, setChatName } = useContext(ChatContext)
 
     useEffect(() => {
         // Checks if a user is logged in
@@ -27,6 +27,7 @@ const Navbar = () => {
         try {
             // logs out the currently logged in user
             setSelectedChat("")
+            setChatName("")
             await signOut(auth)
             toast.success("Successfully Logged Out")
             console.log("Successfully logged out")

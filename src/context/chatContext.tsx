@@ -57,6 +57,7 @@ const fetchRawData = async (
 export const ChatContext = createContext<{
     selectedChat: string,
     setSelectedChat: SetStateFunction<string>,
+    setChatName: SetStateFunction<string>,
     chatUsers: User[],
     chatName: string,
     isLoading: boolean
@@ -64,6 +65,7 @@ export const ChatContext = createContext<{
     ({
         selectedChat: "", // holds the chatId
         setSelectedChat: () => { null }, // for changing the selected chatId globally
+        setChatName: () => { null },
         // chatUsers and chatName changes depending on the selectedChat chatId
         chatUsers: [],
         chatName: "",
@@ -82,7 +84,7 @@ export const ChatContextProvider: FC<Props> = ({ children, initial = "" }) => {
     }, [selectedChat])
 
     return (
-        <ChatContext.Provider value={{ selectedChat, setSelectedChat, chatUsers, chatName, isLoading }}>
+        <ChatContext.Provider value={{ selectedChat, setSelectedChat, setChatName, chatUsers, chatName, isLoading }}>
             {children}
         </ChatContext.Provider>
     )

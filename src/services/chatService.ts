@@ -87,11 +87,12 @@ export const sendNewMessage = async (sender: string | undefined, message: string
                 hour12: true,
             });
 
-            // update the last message
+            // update the last message and date for each user
             chatUsers.map(async (user) => {
                 await setDoc(doc(db, "userChats", user.uid), {
                     [selectedChat]: {
-                        lastMessage: `${message} ◦ ${formattedDate}`
+                        lastMessage: `${message} ◦ ${formattedDate}`,
+                        date: Timestamp.now()
                     }
                 }, { merge: true })
             })

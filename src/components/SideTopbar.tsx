@@ -6,10 +6,10 @@ import Search from "./Search"
 
 interface Props {
     toggleView: boolean
-    setToggleView : (arg : boolean) => void
+    setToggleView: (arg: boolean) => void
 }
 
-const SideTopbar = (props : Props) => {
+const SideTopbar = (props: Props) => {
 
     const { user } = useContext(UserContext)
 
@@ -17,19 +17,25 @@ const SideTopbar = (props : Props) => {
         <div className="side-topbar">
             <div className="side-content">
                 <h2>
-                    <img src={user?.photoURL || ""} referrerPolicy="no-referrer" className="profile-img" /> {user?.displayName}
+                    {user?.photoURL
+                        ? <>
+                            <img src={user?.photoURL || ""} referrerPolicy="no-referrer" className="profile-img" />
+                            {user?.displayName}
+                          </>
+                        : <p>Start Chatting with People! 👉</p>
+                    }
                 </h2>
 
                 <h3 onClick={
-                    () => props.toggleView 
+                    () => props.toggleView
                         ? props.setToggleView(false) // show chats
                         : props.setToggleView(true)} // show search
-                        > 
-                            {!props.toggleView 
-                                ? <HiOutlineSearch className="search-icon" /> 
-                                : <MdOutlineClose className="search-icon"/> }</h3>
+                >
+                    {!props.toggleView
+                        ? <HiOutlineSearch className="search-icon" />
+                        : <MdOutlineClose className="search-icon" />}</h3>
             </div>
-            { props.toggleView  && <Search /> }
+            {props.toggleView && <Search />}
         </div>
     )
 }

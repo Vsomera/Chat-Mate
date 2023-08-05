@@ -10,39 +10,38 @@ export const registerEmailPassword = async (
     username: string,
     email: string,
     password: string,
-    pfp?: File | null) => {
+    pfp: File) => {
 
     try {
         // registers a user into firebase with email and password
         const newUser = await createUserWithEmailAndPassword(auth, email, password)
 
-        // set display name to the username
-        await updateProfile(newUser.user, {
-            displayName: username
+        // send the pfp to storage and attach the photoURL to the user
+        const storageRef = ref(storage, newUser.user.uid)
+        const uploadTask = uploadBytesResumable(storageRef, pfp)
+
+        // access the image from storage by creating a link, then adding link to messages array
+        uploadTask.on("state_changed", async () => {
+            // handle any state changes
+        }, (err: unknown) => {
+            if (err instanceof Error)
+                return toast.error(err.message)
+        }, async () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                // creates an accessible URL to get the user pfp
+                await updateProfile(newUser.user, {
+                    photoURL: downloadURL
+                })
+                // set display name to the username
+                await updateProfile(newUser.user, {
+                    displayName: username
+                })
+                // adds user to firestore database
+                await addUsertoDb(newUser)
+            })
         })
 
-        if (pfp) {
-            // send the pfp to storage and attach the photoURL to the user
-            const storageRef = ref(storage, newUser.user.uid)
-            const uploadTask = uploadBytesResumable(storageRef, pfp)
-
-            // access the image from storage by creating a link, then adding link to messages array
-            uploadTask.on("state_changed", () => {
-                // handle any state changes
-            }, (err: unknown) => {
-                if (err instanceof Error)
-                    return toast.error(err.message)
-            }, () => {
-                getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-                    // creates an accessible URL to get the user pfp
-                    await updateProfile(newUser.user, {
-                        photoURL: downloadURL
-                    })
-                })
-            })
-        }
-
-        await addUsertoDb(newUser) // adds user to firestore database
+        // will redirect to chats page
         toast.success(`Welcome ${username}`)
 
     } catch (err) {
@@ -110,7 +109,7 @@ const addUsertoDb = async (userInfo: UserCredential) => {
             uid: user.uid,
             displayName: user.displayName,
             email: user.email,
-            photoURL: user.photoURL ? user.photoURL : null // checks if a user has a profile picture
+            photoURL: user.photoURL
         })
 
     } catch (err: unknown) {

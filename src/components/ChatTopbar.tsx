@@ -25,7 +25,7 @@ const ChatTopbar = () => {
                                     src={chatUsers[0]?.photoURL || ""}
                                     referrerPolicy="no-referrer"
                                     alt="" />
-                                : <GroupProfileImg chatUsers={chatUsers} />
+                                : <GroupProfileImg chatUsers={[chatUsers[0], chatUsers[1]]} />
                             : <>{isLoading &&
                                 <> <ReactLoading height={"100%%"} width={"100%"} type="spin" /></>}</>
                         }

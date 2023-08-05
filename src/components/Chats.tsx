@@ -58,7 +58,7 @@ const Chats = (props: Props) => {
                                     src={chatPhoto || ""}
                                     alt="" />
                                 // show all user pfp
-                                : <GroupProfileImg chatUsers={chatUsers} />
+                                : <GroupProfileImg chatUsers={[chatUsers[0], chatUsers[1]]} />
                             }
                         </div>
                         <div className="chat-info">

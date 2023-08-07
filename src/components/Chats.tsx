@@ -26,8 +26,8 @@ const Chats = (props: Props) => {
     useEffect(() => {
         const unSub = onSnapshot(doc(db, "userChats", user?.uid || ""), (doc) => {
             // fetch chats of the current logged in user
-            const rawData = Object.entries(doc.data() as Record<string, { 
-                chatName: string, lastMessage: string, chatUsers: User[], date: Timestamp 
+            const rawData = Object.entries(doc.data() as Record<string, {
+                chatName: string, lastMessage: string, chatUsers: User[], date: Timestamp
             }>)
 
             rawData.sort((a, b) => {
@@ -37,7 +37,7 @@ const Chats = (props: Props) => {
                 return dateB - dateA
             })
 
-            const chatsData =  rawData.map((chat) => { // map through all chats from the current logged in user
+            const chatsData = rawData.map((chat) => { // map through all chats from the current logged in user
 
                 const chatId = chat[0]
                 const chatPhoto = chat[1].chatUsers[0].photoURL // TODO : fetch chatPhoto from db
@@ -47,8 +47,8 @@ const Chats = (props: Props) => {
 
                 return (
                     <div className={`userChat ${selectedChat === chatId ? "selected-chat" : "deselected-chat"}`} // TODO : Fix why classes are not adding
-                        key={chatId} 
-                        onClick={() => {chatId !== selectedChat ? changeChat(chatId) : setSelectedChat("")}}>
+                        key={chatId}
+                        onClick={() => { chatId !== selectedChat ? changeChat(chatId) : setSelectedChat("") }}>
 
                         <div className="img-container">
                             {chatUsers.length <= 1
@@ -77,16 +77,23 @@ const Chats = (props: Props) => {
             unSub()
         }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedChat]) // listen for changes realtime, and check when a chat is selected
 
     return (
         <>
             {!props.toggleView &&
-                <div className="chats">
-                    {userChats.length > 0 ? <p>Messages</p> : <p>you have no messages</p>}
-                    {userChats}
-                </div>
+                <>
+                    <div className="chats-divider">
+                        {userChats.length > 0
+                            ? <p>Chats</p>
+                            : <p>You have no Chats</p>}
+                    </div>
+                    
+                    <div className="chats">
+                        {userChats}
+                    </div>
+                </>
             }
         </>
     )

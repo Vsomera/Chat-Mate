@@ -129,6 +129,7 @@ export const sendNewImage = async (image: File, selectedChat: string, senderId: 
         }, () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
                 await updateDoc(doc(db, "chats", selectedChat), {
+                    // sends the image to the messages array in chats
                     messages: arrayUnion({
                         date: Timestamp.now(),
                         senderId: senderId,
@@ -146,7 +147,9 @@ export const sendNewImage = async (image: File, selectedChat: string, senderId: 
 
         chatUsers.map(async (user) => {
             await setDoc(doc(db, "userChats", user.uid), {
+                // update the last message and date for each user in the chat
                 [selectedChat]: {
+                    date: Timestamp.now(),
                     lastMessage: `Sent an Image 🖼️ ◦ ${formattedDate}`
                 }
             }, { merge: true })

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import SideTopbar from "./SideTopbar"
 import Chats from "./Chats"
+import EditProfile from "./EditProfile"
 
 const Sidebar = () => {
     // false : show the chats component
@@ -15,6 +16,7 @@ const Sidebar = () => {
             <Chats
                 toggleView={toggleView}
                 setToggleView={setToggleView} />
+            <EditProfile />
         </aside>
     )
 }

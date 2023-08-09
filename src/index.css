@@ -10,6 +10,9 @@
 
 /*Sidebar*/
 aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 10rem;
     flex-grow: 1;
     background-color: rgba(41, 43, 54, 0.4) !important;
@@ -151,7 +154,7 @@ aside {
 }
 
 .chats {
-    height: 70%;
+    height: 80%;
     width: 80%;
     margin: 0 auto;
     text-align: start;
@@ -236,6 +239,40 @@ main {
     cursor: pointer;
     vertical-align: middle;
     margin-right: 0.8rem;
+}
+
+/* EditProfile Component */
+.edit-profile {
+    height: 10%;
+    background-color: rgba(41, 43, 54, 0.8);
+    border-radius: 0 0 0 1rem;
+}
+.profile-content {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    align-items: center;
+    text-align: start;
+}
+.profile-content img {
+    margin-right: 1rem;
+    border-radius: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+.profile-content p {
+    color: lightgrey;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+}
+.settings-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
 }
 
 /* Messages component*/

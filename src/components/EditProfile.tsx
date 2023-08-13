@@ -1,11 +1,12 @@
 import { UserContext } from "../context/userContext"
 import { RiSettings4Line } from "react-icons/ri"
-import { useContext } from "react"
+import { useState, useContext } from "react"
+import Modal from "../components/ProfileModal"
 
 const EditProfile = () => {
 
     const { user } = useContext(UserContext)
-
+    const [modalIsOpen, setIsOpen] = useState(false)
 
     return (
         <div className="edit-profile">
@@ -19,8 +20,13 @@ const EditProfile = () => {
                 </div>
                 <RiSettings4Line 
                     className="settings-icon" 
-                    onClick={() => console.log("clicked")}/>
+                    onClick={() => modalIsOpen ? setIsOpen(false) : setIsOpen(true)}/>
             </div>
+            {modalIsOpen 
+                && <Modal 
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen} 
+                    />}
         </div>
     )
 }

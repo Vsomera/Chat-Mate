@@ -4,7 +4,8 @@ import { toast } from "react-toastify"
 import { signInWithPopup } from "firebase/auth"
 import { UserCredential } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
+
 
 export const registerEmailPassword = async (
     username: string,
@@ -163,5 +164,54 @@ const uploadUserProfileImage = async (photoURL: string | null, uid: string | nul
 
     } catch (error) {
         console.error("Error uploading user profile image:", error);
+    }
+}
+
+export const editProfile = async (pfp: File | null) => {
+    // change the users profile picture
+    if (auth.currentUser) {
+        try {
+
+            const { uid } = auth.currentUser
+
+            if (pfp) {
+                const oldPfpRef = ref(storage, uid)
+                // delete the current pfp from storage
+                deleteObject(oldPfpRef).then(() => {
+                    // add the new pfp to storage
+                    const storageRef = ref(storage, uid)
+                    const uploadTask = uploadBytesResumable(storageRef, pfp)
+
+                    uploadTask.on("state_changed", async () => {
+                        // handle any state changes
+                    }, (err: unknown) => {
+                        if (err instanceof Error)
+                            return toast.error(err.message)
+                    }, async () => {
+                        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                            if (auth.currentUser) {
+
+                                // update the photoUrl with the new profile picture
+                                await updateProfile(auth.currentUser, {
+                                    photoURL: downloadURL
+                                })
+
+                                // update firestore database photoURL
+                                await setDoc(doc(db, "users", uid), {
+                                    photoURL: downloadURL
+                                }, { merge: true })
+
+                                // reload the app to show pfp changes
+                                window.location.reload()
+                            }
+                        })
+                    })
+                })
+
+            }
+
+        } catch (err: unknown) {
+            console.log(err)
+        }
     }
 }

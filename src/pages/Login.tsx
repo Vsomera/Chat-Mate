@@ -91,7 +91,10 @@ const Login = () => {
 
                         </form>
 
-                        <button type="submit" onClick={onSubmit}>Log In</button>
+                        <button 
+                            className="auth-btn" 
+                            type="submit" 
+                            onClick={onSubmit}>Log In</button>
 
                     </section>
 

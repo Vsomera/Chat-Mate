@@ -277,7 +277,7 @@ input::-webkit-input-placeholder {
 }
 
 /*Button underline for log in and register*/
-button {
+.auth-btn {
   margin: 0 auto;
   width: 10%;
   white-space: nowrap;
@@ -287,7 +287,7 @@ button {
   cursor: pointer;
 }
 
-button::after {
+.auth-btn::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -300,7 +300,7 @@ button::after {
   transition: transform 0.25s ease-out;
 }
 
-button:hover::after {
+.auth-btn:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }

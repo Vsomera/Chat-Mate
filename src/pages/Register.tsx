@@ -148,7 +148,10 @@ const Register = () => {
                             </label>
 
                         </form>
-                        <button type="submit" onClick={onSubmit}>Sign In</button>
+                        <button 
+                            className="auth-btn"
+                            type="submit" 
+                            onClick={onSubmit}>Sign In</button>
                     </section>
 
                 </div>

@@ -2,6 +2,9 @@ import { useContext, useState, useEffect } from "react"
 import { ChatContext } from "../context/chatContext"
 import { MdOutlineClose } from "react-icons/md"
 import { AiOutlineCheck } from "react-icons/ai"
+import { changeChatName } from "../services/chatService"
+import { UserContext } from "../context/userContext"
+import { toast } from "react-toastify"
 
 interface Props {
     modalIsOpen: boolean
@@ -10,12 +13,22 @@ interface Props {
 
 const ChatNameModal = (props: Props) => {
 
-    const { selectedChat, chatName } = useContext(ChatContext)
+    const { user } = useContext(UserContext)
+    const { selectedChat, chatName, chatUsers, setSelectedChat, setChatName } = useContext(ChatContext)
     const [newChatName, setNewChatName] = useState("")
 
     useEffect(() => {
         setNewChatName(chatName)
     }, [chatName])
+
+    const handleConfirm = async () => {
+        if (user) {
+            setChatName(newChatName)
+            await changeChatName(selectedChat, newChatName, [...chatUsers, user])
+            props.setIsOpen(false)   
+            toast.success("Name Change Successful")
+        }
+    }
 
     return (
         <>
@@ -39,12 +52,12 @@ const ChatNameModal = (props: Props) => {
                             <div className="modal-btns">
                                 <button onClick={() => props.setIsOpen(false)}>
                                     <MdOutlineClose />
-                                        </button>
-                                { chatName !== newChatName 
-                                    && newChatName.concat().trim() !== "" && 
-                                    <button>
+                                </button>
+                                {chatName !== newChatName
+                                    && newChatName.concat().trim() !== "" &&
+                                    <button onClick={() => handleConfirm()}>
                                         <AiOutlineCheck />
-                                            </button>}
+                                    </button>}
                             </div>
 
                         </div>

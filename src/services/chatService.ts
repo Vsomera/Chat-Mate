@@ -161,3 +161,20 @@ export const sendNewImage = async (image: File, selectedChat: string, senderId: 
         }
     }
 }
+
+export const changeChatName = async (selectedChat: string, newChatName: string, chatUsers: User[]) => {
+    try {
+        // changes the group chat name of a selected Chat
+        chatUsers.map(async (user) => {
+            await setDoc(doc(db, "userChats", user.uid), {
+                [selectedChat]: {
+                    chatName: newChatName
+                }
+            }, { merge: true })
+        })
+
+    } catch (err: unknown) {
+        console.log(err)
+    }
+}
+

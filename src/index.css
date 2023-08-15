@@ -235,7 +235,7 @@ main {
     vertical-align: middle;
 }
 
-.chat-options * {
+.chat-options svg {
     cursor: pointer;
     vertical-align: middle;
     margin-right: 0.8rem;
@@ -397,6 +397,30 @@ main {
     right: 0.7rem;
     bottom : -1.2rem
 } 
+
+/* Chat Name Modal Component*/
+.modal-text {
+    color: #AAA;
+}
+.modal-input-container {
+    width: 80%;
+    margin: 0 auto;
+}
+.modal-input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    border-bottom: 1px solid white;
+    outline: none;
+  }
+  input::-webkit-input-placeholder {
+    color: #AAA;
+  }
+  .modal-input:focus+.underline {
+    transform: scale(1);
+  }
 
 /* Messages component*/
 .messages {

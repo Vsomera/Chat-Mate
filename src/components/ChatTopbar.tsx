@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import ReactLoading from "react-loading"
 import { BsCameraVideo } from "react-icons/bs"
 import { AiOutlineEdit } from "react-icons/ai"
@@ -6,10 +6,13 @@ import { IoMdClose } from "react-icons/io"
 import { ChatContext } from "../context/chatContext"
 import GroupProfileImg from "./GroupProfileImg"
 import { toast } from "react-toastify"
+import ChatNameModal from "./ChatNameModal"
 
 const ChatTopbar = () => {
 
     const { chatName, chatUsers, selectedChat, setSelectedChat, isLoading } = useContext(ChatContext)
+
+    const [modalIsOpen, setIsOpen] = useState<boolean>(false)
 
     return (
         <div className="chat-topbar">
@@ -41,7 +44,8 @@ const ChatTopbar = () => {
                     {selectedChat &&
                         <>
                             <BsCameraVideo onClick={() => toast.warning("Work In Progress")}/>
-                            {chatUsers.length > 1 && < AiOutlineEdit onClick={() => toast.warning("Work In Progress")} /> }
+                            {chatUsers.length > 1 && < AiOutlineEdit onClick={() => setIsOpen(true)} /> }
+                            {modalIsOpen && <ChatNameModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}/>}
                             <IoMdClose onClick={() => setSelectedChat("")} />
                         </>
                     }

@@ -14,7 +14,7 @@ interface Props {
 const ChatNameModal = (props: Props) => {
 
     const { user } = useContext(UserContext)
-    const { selectedChat, chatName, chatUsers, setSelectedChat, setChatName } = useContext(ChatContext)
+    const { selectedChat, chatName, chatUsers, setChatName } = useContext(ChatContext)
     const [newChatName, setNewChatName] = useState("")
 
     useEffect(() => {

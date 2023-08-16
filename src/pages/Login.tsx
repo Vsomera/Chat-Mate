@@ -71,6 +71,10 @@ const Login = () => {
                             <h1><FaSignInAlt className="icon" />  Login</h1>
                         </div>
 
+                        <div className="mobile-signin" style={{ display: "none" }}>
+                            <AuthMethods />
+                        </div>
+
                         <form className="login-group" autoComplete="off">
                             <input
                                 id="email"
@@ -91,9 +95,9 @@ const Login = () => {
 
                         </form>
 
-                        <button 
-                            className="auth-btn" 
-                            type="submit" 
+                        <button
+                            className="auth-btn"
+                            type="submit"
                             onClick={onSubmit}>Log In</button>
 
                     </section>

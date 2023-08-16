@@ -36,6 +36,7 @@ nav {
 
 .nav-content {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   padding: 10px 0;
 }
@@ -83,8 +84,8 @@ nav {
 /*Inherits the background of the auth-background*/
 .background {
   position: absolute;
-  width: 100%;
-  height: 100vh;
+  min-width: 100%;
+  height: 100%;
   background-image: 
     linear-gradient(to bottom, #292b36, rgba(62, 64, 75, 0.8)),
     url("./images/trees2.svg");
@@ -114,6 +115,39 @@ nav {
   margin: 0 auto;
   width: 90%;
   height: 90vh;
+}
+@media (width < 1300px) {
+  .auth-container {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .register-content,
+  .login-content {
+    display: none !important;
+  }
+  .register-form, 
+  .login-form {
+    min-width: 90% !important;
+    min-height: 80% !important;
+    justify-content: space-evenly;
+    margin: auto;
+  }
+  hr {
+    display: none;
+  }
+  .register-content, 
+  .login-content {
+    height: 7rem !important;
+  }
+  body {
+    overflow: auto;
+  }
+  .mobile-signin {
+    display: inline !important;
+    width: 95%;
+    margin: 0 auto;
+    background-color: transparent !important;
+  }
 }
 .register-content, 
 .login-content {
@@ -145,6 +179,10 @@ nav {
   display: flex;
   align-items: center;
   text-align: center;
+  background-color: transparent;
+}
+.auth-divider p {
+  background-color: transparent;
 }
 .auth-divider::before,
 .auth-divider::after {
@@ -167,12 +205,14 @@ nav {
   height: 3rem;
   width: 100%;
   display: flex;
+  background-color: transparent !important;
 }
 .auth-methods div {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  background-color: transparent !important;
 }
 
 .icon-wrapper:nth-child(-n+2) {
@@ -183,6 +223,7 @@ nav {
 .auth-icon { 
   height: 2rem;
   width: 2rem;
+  background-color: transparent !important;
 }
 
 /* Auth icon animations */

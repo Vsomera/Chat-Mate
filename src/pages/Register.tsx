@@ -73,20 +73,19 @@ const Register = () => {
         <>
             <div className="background">
                 <div className="auth-container">
-
                     <section className="register-content">
-                        <h1>Create an Account</h1>
-                        <div>
-                            <p>We'll need your name, email address, and a unique password. </p>
-                            <p>You'll use this login to access ChatMate next time. </p>
+                        <>
+                            <h1>Create an Account</h1>
+                            <div>
+                                <p>We'll need your name, email address, and a unique password. </p>
+                                <p>You'll use this login to access ChatMate next time. </p>
+                            </div>
 
-                        </div>
-
-                        <div className="auth-divider"><p>or sign in with</p></div>
-
-                        <AuthMethods />
-
+                            <div className="auth-divider"><p>or sign in with</p></div>
+                            <AuthMethods />
+                        </>
                     </section>
+
 
                     <hr />
 
@@ -95,6 +94,10 @@ const Register = () => {
                             <h1><FaRegUser className="icon" /> Register</h1>
                         </div>
 
+                        <div className="mobile-signin" style={{ display: "none" }}>
+                            <AuthMethods />
+                        </div>
+                        
                         <form className="register-group" autoComplete="off">
                             <input
                                 id="name"
@@ -132,27 +135,31 @@ const Register = () => {
 
                             <input
                                 id="file"
-                                style={{ display : "none"}}
+                                style={{ display: "none" }}
                                 className="user-pfp"
                                 type="file"
-                                accept="image/*" 
-                                onChange={(e) => setPfp(e.target.files?.[0] || null)}/>
-                            
-                            <label 
+                                accept="image/*"
+                                onChange={(e) => setPfp(e.target.files?.[0] || null)} />
+
+                            <label
                                 className="add-pfp"
                                 htmlFor="file"
                                 style={{ display: "flex" }}>
-                                <BiImageAdd 
+                                <BiImageAdd
                                     className="add-pfp-icon" />
                                 <p>Add profile picture</p>
                             </label>
 
                         </form>
-                        <button 
+
+                        <button
                             className="auth-btn"
-                            type="submit" 
+                            type="submit"
                             onClick={onSubmit}>Sign In</button>
                     </section>
+
+
+
 
                 </div>
             </div>

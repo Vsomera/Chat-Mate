@@ -70,7 +70,6 @@ const Register = () => {
     }
 
     return (
-        <>
             <div className="background">
                 <div className="auth-container">
                     <section className="register-content">
@@ -163,7 +162,6 @@ const Register = () => {
 
                 </div>
             </div>
-        </>
     )
 }
 

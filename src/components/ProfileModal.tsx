@@ -30,10 +30,16 @@ const ProfileModal = (props: Props) => {
         }
     }, [newPfp])
 
+    const handleContainerClick = (e :  React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            props.setIsOpen(false)
+        }
+    }
+
     return (
         <>
             {props.modalIsOpen &&
-                <div className="modal">
+                <div className="modal" onClick={handleContainerClick}>
                     <div className="modal-container">
                         <div className="modal-wrapper">
 
@@ -74,9 +80,6 @@ const ProfileModal = (props: Props) => {
                                     </div>
 
                                     <div className="modal-btns">
-                                        <button onClick={() => props.setIsOpen(false)}>
-                                            Cancel
-                                        </button>
                                         { imgURL && <button onClick={() => handleSave()}>
                                             Save
                                         </button>}

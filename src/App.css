@@ -62,6 +62,14 @@ nav {
     display: none;
   }
 }
+@media (width < 1200px) {
+  .mobile-pfp {
+    display: inline !important;
+    border: #1990ff 2px solid;
+    cursor: pointer;
+  }
+}
+
 .nav-link,
 #title a {
   text-decoration: none;

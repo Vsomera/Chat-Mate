@@ -5,16 +5,19 @@ import { signOut } from "firebase/auth"
 import { toast } from "react-toastify"
 import { Link } from "react-router-dom"
 import { ChatContext } from "../context/chatContext"
+import { UserContext } from "../context/userContext"
+import SidebarModal from "../components/SidebarModal"
 
 const Navbar = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-
+    const { user } = useContext(UserContext)
     const { setSelectedChat, setChatName } = useContext(ChatContext)
+    const [showSidebarModal, setSidebarModal] = useState(false)
 
     useEffect(() => {
         // Checks if a user is logged in
-        auth.onAuthStateChanged((user)=> {
+        auth.onAuthStateChanged((user) => {
             if (user != null) {
                 setIsLoggedIn(true)
             } else {
@@ -48,8 +51,25 @@ const Navbar = () => {
                         </Link>
                     </div>
 
+                    { user?.photoURL && 
+                        <img
+                            src={user.photoURL}
+                            className="mobile-pfp"
+                            onClick={() => setSidebarModal(true)}
+                            style={
+                                {
+                                    display: "none",
+                                    width: "2rem",
+                                    height: "2rem",
+                                    borderRadius: "3rem"
+                                }
+                            } />
+                    }
+
+                    {showSidebarModal && <SidebarModal setSidebarModal={setSidebarModal} />}
+
                     <ul>
-                        { !isLoggedIn &&
+                        {!isLoggedIn &&
                             <>
                                 <li>
                                     <Link className="nav-link" to="/login">
@@ -63,7 +83,7 @@ const Navbar = () => {
                                 </li>
                             </>
                         }
-                        { isLoggedIn &&
+                        {isLoggedIn &&
                             <li onClick={logout}>
                                 <Link className="nav-link" to="/login">
                                     <FaSignOutAlt className="icon" />  LogOut

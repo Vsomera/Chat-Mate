@@ -112,6 +112,7 @@ aside {
     margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
+    overflow: auto;
 }
 .selected-users {
     width: 90%;
@@ -126,6 +127,11 @@ aside {
     background-color: rgb(93, 95, 108, 0.5);
     margin-right: 0.5rem;
 }
+.modal .selected-user p,
+.modal svg {
+    background-color: transparent;
+}
+
 .selected-user p {
     margin: auto 0 auto 0.2rem;
     flex-grow: 3;
@@ -301,8 +307,29 @@ main {
     background-color: rgba(41, 43, 54, 1);
     border-radius: 2rem;
 }
+.modal .img-container {
+    background-color: transparent !important
+}
+
+.modal .chat-info p, 
+.modal .searched-user-info p {
+    background-color: rgb(93, 95, 108, 0.5) !important;
+}
+.modal .chats {
+    height: 70% !important;
+}
+.modal .side-topbar {
+    border-radius: 3rem;
+}
+
+@media (width < 1200px) {
+    .modal-container {
+        height: 60%;
+        width: 80%;
+    }
+}
 .modal-wrapper {
-    height: 90%;
+    height: 100%;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -342,9 +369,11 @@ main {
     height: 4rem;
     width: 4rem;
 }
-
+.edit-options {
+    display: flex;
+    align-items: center;
+}
 .change-pfp-container {
-    width: 80%;
     margin: 0 auto;
 }
 .change-pfp-container p {
@@ -377,13 +406,10 @@ main {
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
-}
-.modal-btns button:nth-child(1) {
-    background-color: rgba(93, 95, 108, 0.7);
-}
-.modal-btns button:nth-child(2) {
     background-color: #1990FF;
+
 }
+
 .modal-loading {
     display: flex;
     align-items: center;

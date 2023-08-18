@@ -1,7 +1,5 @@
 import { useContext, useState, useEffect } from "react"
 import { ChatContext } from "../context/chatContext"
-import { MdOutlineClose } from "react-icons/md"
-import { AiOutlineCheck } from "react-icons/ai"
 import { changeChatName } from "../services/chatService"
 import { UserContext } from "../context/userContext"
 import { toast } from "react-toastify"
@@ -30,10 +28,17 @@ const ChatNameModal = (props: Props) => {
         }
     }
 
+    
+    const handleContainerClick = (e :  React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            props.setIsOpen(false)
+        }
+    }
+
     return (
         <>
             {props.modalIsOpen &&
-                <div className="modal">
+                <div className="modal" onClick={handleContainerClick}>
                     <div className="modal-container">
                         <div className="modal-wrapper">
                             <div className="edit-pf-divider"><p>Change Group Name</p></div>
@@ -50,13 +55,10 @@ const ChatNameModal = (props: Props) => {
                             </div>
 
                             <div className="modal-btns">
-                                <button onClick={() => props.setIsOpen(false)}>
-                                    <MdOutlineClose />
-                                </button>
                                 {chatName !== newChatName
                                     && newChatName.concat().trim() !== "" &&
                                     <button onClick={() => handleConfirm()}>
-                                        <AiOutlineCheck />
+                                        Save
                                     </button>}
                             </div>
 

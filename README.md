@@ -14,7 +14,7 @@ A scalable, cross-Platform chat application. Supports real-time direct messages 
 ## Demo Account
 
 
-https://chat-mate-pi.vercel.app/login
+https://chat-mate-pi.vercel.app
 ```
 email : cindy123@gmail.com
 password : Cindy123!
